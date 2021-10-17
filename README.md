@@ -55,10 +55,10 @@ These feature(s) are needed -
 
 # Team Members
 
-Neev Mittal - [Github account](https://github.com/neevmittal) \n
-Siddharth Datar - [Github account](https://github.com/SiddharthDatar) \n
-Peiqi Liu - [Github account](https://github.com/leo20021210) \n
-Daanyal Akhtar - [Github account]( 
+1. Neev Mittal - [Github account](https://github.com/neevmittal)
+1. Siddharth Datar - [Github account](https://github.com/SiddharthDatar)
+1. Peiqi Liu - [Github account](https://github.com/leo20021210)
+1. Daanyal Akhtar - [Github account]( 
 
 The project idea came about as an observation of the activity around us. A lot of our friends and family were making choices to go dairy, free, vegetarian, vegan or were allergic to certain ingredients in food. It is always an uncomfortable position when you get to a restaurant and realize that there is nothing in the restaurant for you to eat. All of this could be avoided if there was a way to check the restaurant's menu (in more detail that what is available online) to make sure that there a couple of choices for you. This is also helpful if you're trying to home delivery - instead of calling the people at the restaurant you can be sure through our application. 
 
