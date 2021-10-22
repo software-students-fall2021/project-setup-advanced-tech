@@ -12,6 +12,7 @@
 .welcomeHeader{
   display: flex;
   flex-direction: vertical;
+  text-align: center
 }
 
 button{
