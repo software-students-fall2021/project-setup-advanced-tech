@@ -1,0 +1,10 @@
+button{
+    display: block;
+    text-align: center;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.spacing{
+    height: 20px;
+}

@@ -1,0 +1,17 @@
+button{
+    font-size: 25px;
+    border: none;
+    width: 25%;
+    height: 100px;
+    border-radius: 100px;
+    background-color: lightcoral;
+  }
+  
+  button:hover{
+    cursor:pointer;
+    background-color: lightcyan;
+  }
+  
+  button:hover > a{
+    color: black;
+  }
