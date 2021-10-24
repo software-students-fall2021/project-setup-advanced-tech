@@ -3,3 +3,23 @@
 .Signin > h2{
     margin-top: 100px;
 }
+
+.input{
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    width: 20%;
+}
+
+form{
+    margin-top: 200px;
+}
+
+form > button{
+    width: 20%;
+    height: 40px;
+}
+
+.spacing{
+    height: 20px;
+}

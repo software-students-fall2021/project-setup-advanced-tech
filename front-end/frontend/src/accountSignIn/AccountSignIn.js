@@ -26,7 +26,7 @@ function AccountSignIn(){
   <div className={styles.buttons}>
     <Route path="/login-create-account/login" component={Signin}></Route>
     <Route path="/login-create-account/createaccount" component={Createaccount}></Route>
-    <Route path="/login-create-account/reset-password" component={Resetpassword}></Route>
+    <Route path="/login-create-account/resetpassword" component={Resetpassword}></Route>
     <Route path="/login-create-account/contact-us" component={Contactus}></Route>
     {signin && createAccount && resetpassword && contactus ? <Link to="/login-create-account/login"><button className="welcomeButton" id={styles.first} onClick={changePage}>Sign in</button></Link>: null}
     {signin && createAccount && resetpassword && contactus ? <Link to="/login-create-account/createaccount"><button className="welcomeButton" id={styles.second} onClick={changePage}>Create Account</button></Link>: null}

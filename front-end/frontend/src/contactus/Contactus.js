@@ -28,6 +28,8 @@ const Contactus = () => (
           <input type="text" value="Enter your message."></input>
         </div>
       </div>
+      <div className={styles.spacing}></div>
+      <button>Submit.</button>
     </form>
   </div>
 );
