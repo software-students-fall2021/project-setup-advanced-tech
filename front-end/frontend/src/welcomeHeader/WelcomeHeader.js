@@ -5,7 +5,7 @@ import AccountSignIn from '../accountSignIn/AccountSignIn';
 import {Route, Link} from 'react-router-dom';
 import LoadingPage from '../loadingPage/LoadingPage';
 import '../button.css';
-
+import Signin from '../signin/Signin';
 function WelcomeHeader(){
   const [toggled, removeButton] = useState(true);
   const [explore, toggleExplore] = useState(true);
