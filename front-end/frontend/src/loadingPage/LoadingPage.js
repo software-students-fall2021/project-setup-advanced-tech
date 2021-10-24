@@ -5,6 +5,9 @@ import Header from '../header/Header';
 import {Route, Link} from 'react-router-dom';
 
 function LoadingPage(){
+  window.onpopstate = function(event) {
+    window.location.reload();
+};
   return( <Header></Header>
 );
 }

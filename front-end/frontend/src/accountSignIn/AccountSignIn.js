@@ -15,6 +15,10 @@ function AccountSignIn(){
   const [resetpassword, toggleResetPassword] = useState(true);
   const [contactus, toggleContactus] = useState(true);
 
+  window.onpopstate = function(event) {
+    window.location.reload();
+};
+
   function changePage(){
     toggleSignin(false);
     toggleCreateAccount(false);
@@ -28,10 +32,10 @@ function AccountSignIn(){
     <Route path="/login-create-account/createaccount" component={Createaccount}></Route>
     <Route path="/login-create-account/resetpassword" component={Resetpassword}></Route>
     <Route path="/login-create-account/contact-us" component={Contactus}></Route>
-    {signin && createAccount && resetpassword && contactus ? <Link to="/login-create-account/login"><button className="welcomeButton" id={styles.first} onClick={changePage}>Sign in</button></Link>: null}
-    {signin && createAccount && resetpassword && contactus ? <Link to="/login-create-account/createaccount"><button className="welcomeButton" id={styles.second} onClick={changePage}>Create Account</button></Link>: null}
-    {signin && createAccount && resetpassword && contactus ? <Link to="/login-create-account/resetpassword"><button className="welcomeButton" id={styles.third} onClick={changePage}>Reset Password</button></Link>: null}
-    {signin && createAccount && resetpassword && contactus ? <Link to="/login-create-account/contact-us"><button className="welcomeButton" id={styles.fourth} onClick={changePage}>Contact Us</button></Link>: null}
+    {signin && createAccount && resetpassword && contactus && window.location.href=="http://localhost:3000/login-create-account"? <Link to="/login-create-account/login"><button className="welcomeButton" id={styles.first} onClick={changePage}>Sign in</button></Link>: null}
+    {signin && createAccount && resetpassword && contactus && window.location.href=="http://localhost:3000/login-create-account"? <Link to="/login-create-account/createaccount"><button className="welcomeButton" id={styles.second} onClick={changePage}>Create Account</button></Link>: null}
+    {signin && createAccount && resetpassword && contactus && window.location.href=="http://localhost:3000/login-create-account"? <Link to="/login-create-account/resetpassword"><button className="welcomeButton" id={styles.third} onClick={changePage}>Reset Password</button></Link>: null}
+    {signin && createAccount && resetpassword && contactus && window.location.href=="http://localhost:3000/login-create-account"? <Link to="/login-create-account/contact-us"><button className="welcomeButton" id={styles.fourth} onClick={changePage}>Contact Us</button></Link>: null}
   </div>
 );
 }
