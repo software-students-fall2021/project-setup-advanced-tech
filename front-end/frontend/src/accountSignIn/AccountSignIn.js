@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from './AccountSignIn.module.css';
 import '../button.css';
 import WelcomeHeader from '../welcomeHeader/WelcomeHeader';
-import SignIn from '../signin/SignIn';
 import {Route, Link} from 'react-router-dom';
 
 const AccountSignIn = () => (
