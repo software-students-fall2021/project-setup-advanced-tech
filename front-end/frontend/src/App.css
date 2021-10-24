@@ -14,5 +14,7 @@
     display: block;
     top: 20%;
     position: relative;
+    text-decoration: none;
+    border-radius: 2px;
   }
   

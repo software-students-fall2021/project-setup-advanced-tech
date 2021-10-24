@@ -6,7 +6,6 @@
 }
 
 .welcomeHeader{
-  text-align: center;
   width: 100%;
 }
 
@@ -22,4 +21,16 @@
 
 .welcomeHeader > h2{
   font-size: 25px;
+}
+
+.signin{
+  height: 30px;
+}
+
+#first{
+  margin-top: 150px;
+}
+
+#second{
+  margin-top: 100px;
 }

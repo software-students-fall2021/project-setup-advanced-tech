@@ -8,7 +8,7 @@ function Header(){
   <header className={styles.header}>
     <div className={styles.spacing}></div>
     <div className={styles.logoaccount}>
-      <h2>Weet</h2>
+      <img></img>
     </div>
     <div className={styles.spacing}></div>
     <div className={styles.searchsearch}>
@@ -20,10 +20,10 @@ function Header(){
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.filters}>
-      <button className="location">Location</button>
-      <button className="food-type">Food-type</button>
-      <button className="rate">Rate</button>
-      <button className="apply-filters">Apply-Filters</button>
+      <button>Location</button>
+      <button>Food-type</button>
+      <button>Rate</button>
+      <button>Apply-Filters</button>
     </div>
   </header>
 );
