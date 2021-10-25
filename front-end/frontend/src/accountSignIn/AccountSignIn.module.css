@@ -1,0 +1,26 @@
+button{
+    display: block;
+    text-align: center;
+    margin: auto;
+    border-radius: 5px;
+}
+
+.spacing{
+    height: 20px;
+}
+
+#first{
+    margin-top: 80px;
+}
+
+#second{
+    margin-top: 50px;
+}
+
+#third{
+    margin-top: 50px;
+}
+
+#fourth{
+    margin-top: 50px;
+}
