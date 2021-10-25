@@ -4,6 +4,12 @@ import styles from './Resetpassword.module.css';
 
 const Resetpassword = () => (
   <div className={styles.Resetpassword}>
+    <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
     <form>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
@@ -18,6 +24,8 @@ const Resetpassword = () => (
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
       <button>Send me a link.</button>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
     </form>
   </div>
 );

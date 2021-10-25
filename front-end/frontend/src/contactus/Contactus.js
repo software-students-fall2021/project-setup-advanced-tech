@@ -4,8 +4,8 @@ import styles from './Contactus.module.css';
 
 const Contactus = () => (
   <div className={styles.Contactus}>
-    <h2>Contact the team.</h2>
     <form>
+      <h2>Contact the team.</h2>
       <div className={styles.firstnameLastname}>
         <div className="name">
           <h3>First Name *</h3>
