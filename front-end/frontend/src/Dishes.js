@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-import {Jumbotron} from 'react-bootstrap'
+import { Jumbotron } from 'reactstrap';
 import {Image} from 'react-bootstrap'
 import {Row} from 'react-bootstrap'
 import {Col} from 'react-bootstrap'
 import './Dishes.css'
+import {Button} from 'react-bootstrap'
 
 const Dishes = (props) => {
   // console.log(props);
@@ -24,6 +25,19 @@ const Dishes = (props) => {
     <Jumbotron className="box">
       <Col className="image" xs={3} md={3}>
         <Image src={imgSrc} thumbnail/>
+      </Col>
+      <Col className="word" xs={3} md={3}>
+        <Row>
+          <Col xs={5}>
+            <h3>{props.details.name}</h3>
+          </Col>
+          <Col>
+          <Button><span>{props.details.collection}</span><span>Collect</span></Button>
+          </Col>
+        </Row>
+        <Row>
+          <p>{props.details.description}</p>
+        </Row>
       </Col>
     </Jumbotron>
     </Container>
