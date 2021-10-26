@@ -6,7 +6,6 @@ function App() {
     <div className="homePage">
       <header className="welcomeHeader">
         <h1>Welcome to Weet.</h1>
-        <h2><i>A place for all your dietary needs.</i></h2>
         <h2><i>Find restaurants that fit your dietary preferences and restrictions</i></h2>
       </header>
       <div class="center-button">
