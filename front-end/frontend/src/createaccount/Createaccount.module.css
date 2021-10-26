@@ -1,16 +1,44 @@
-.Createaccount {}
+.Createaccount {
+    text-align: center;
+}
 
-.firstlast{
-    display: flex;
-    justify-content: space-between;
-    width: 25%;
+.Createaccount form{
+    background-color: lightpink;
+    height: 600px;
+    width: 75%;
     margin: auto;
 }
 
-.spacing{
+.Createaccount .firstlast{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.Createaccount .spacing{
     height: 20px;
 }
 
-form{
+.Createaccount form{
     margin-top: 40px;
+}
+
+.Createaccount .input > input{
+    width: 80%;
+    text-align: center;
+    height: 30px;
+}
+.Createaccount .firstlast > .input{
+    width: 40%;
+}
+.Createaccount .firstlast > .input > input{
+    width: 100%;
+}
+
+.Createaccount button{
+    background-color: white;
+    width: 20%;
+    height: 40px;
+    
 }

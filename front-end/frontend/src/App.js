@@ -1,16 +1,16 @@
+
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import WelcomeHeader from './welcomeHeader/WelcomeHeader';
+import LoadingPage from './loadingPage/LoadingPage';
+import AccountSignIn from './accountSignIn/AccountSignIn';
+import {Route, Link} from 'react-router-dom';
 
 function App() {
   return (
-    <div className="homePage">
-      <header className="welcomeHeader">
-        <h1>Welcome to Weet.</h1>
-        <h2><i>A place for all your dietary needs.</i></h2>
-      </header>
-      <div class="center-button">
-        <button><a href="https://www.google.com/">Click to explore.</a></button>
-      </div>
+    <div className="App">
+      <WelcomeHeader/>
     </div>
   );
 }
