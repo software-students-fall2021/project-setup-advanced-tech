@@ -9,7 +9,7 @@ const DishesDisplay = (props) => {
   const [data, setData] = useState([])
 
   // the following side-effect will be called once upon initial render
-  /*useEffect(() => {
+  useEffect(() => {
     // fetch some mock data about animals for sale
     console.log('fetching 10 random dishes...')
     axios(`https://my.api.mockaroo.com/dishes.json?key=a77dd4e0?id=${props.id}`)
@@ -41,26 +41,7 @@ const DishesDisplay = (props) => {
 
         setData(backupData)
       })
-  }, [props.id])*/
-  
-  const backupData = [
-    {
-      "id":1,
-      "name":"Ahmed",
-      "ingredients":"OpnRV2Z",
-      "collections":78,
-      "image":"http://dummyimage.com/190x100.png/ff4444/ffffff"
-    },
-    {
-      "id":2,
-      "name":"Mallorie",
-      "ingredients":"c6TwOSFE",
-      "collections":84,
-      "image":"http://dummyimage.com/173x100.png/ff4444/ffffff"},
-  ]
-  useEffect(()=>{
-    setData(backupData)
-  },[])
+  }, [props.id])
   console.log(data)
   return (
     <div className="DishesDisplay">
