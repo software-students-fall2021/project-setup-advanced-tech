@@ -9,7 +9,7 @@ const RestaurantList = (props) => {
   const [data, setData] = useState([])
 
   // the following side-effect will be called once upon initial render
-  /*useEffect(() => {
+  useEffect(() => {
     // fetch some mock data about animals for sale
     //console.log('fetching 10 random animals...')
     axios('https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0')
