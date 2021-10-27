@@ -22,7 +22,7 @@ function WelcomeHeader(){
   return(
   <header className={styles.welcomeHeader}>
     <div className={styles.spacing}></div>
-    <div className="welcomeMessage">
+    <div className={styles.welcomeMessage}>
       <h1>Welcome to Weet.</h1>
       <h2><i>A place for all your dietary needs.</i></h2>
     </div>
