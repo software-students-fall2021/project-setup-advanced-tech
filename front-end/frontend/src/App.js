@@ -1,18 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-import Search from "./Search"
 
+import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Dishes from './Dishes';
+
+const backupData = [
+  {
+    "id":1,
+    "name":"Ahmed",
+    "ingredients":"OpnRV2Z",
+    "collections":78,
+    "image":"http://dummyimage.com/190x100.png/ff4444/ffffff"
+  },
+  {
+    "id":2,
+    "name":"Mallorie",
+    "ingredients":"c6TwOSFE",
+    "collections":84,
+    "image":"http://dummyimage.com/173x100.png/ff4444/ffffff"},
+]
+const data=backupData[0]
+console.log(data)
 function App() {
   return (
     <div className="homePage">
-      <header className="welcomeHeader">
-        <h1>Welcome to Weet.</h1>
-        <h2><i>A place for all your dietary needs.</i></h2>
-      </header>
-      <div className="center-button">
-        <button><a href="https://www.google.com/">Click to explore.</a></button>
-      </div>
-      <Search></Search>
+      <Dishes key="1" details={data} />
     </div>
   );
 }
