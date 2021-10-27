@@ -67,7 +67,7 @@
 
     .header .searchsearch form button{
         font-size: 15px;
-        height: 20px;
+        height: 40px;
         width: 40%;
     }
 
@@ -78,11 +78,11 @@
 
     .header .filters > button{
         font-size: 15px;
-        height: 20px;
-        width: 40%;
+        height: 30px;
+        width: 50%;
     }
 
     .header .searchsearch input{
-        height: 30px;
+        height: 40px;
     }
   }
