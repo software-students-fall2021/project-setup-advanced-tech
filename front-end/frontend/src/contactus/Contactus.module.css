@@ -57,3 +57,14 @@
     background-color: darkcyan;
     color: white;
 }
+
+@media only screen and (max-width: 768px) {
+    .Contactus .firstnameLastname{
+        flex-direction: column;
+        width: 75%;
+    }
+    
+    .Contactus .firstnameLastname *{
+        margin: auto;
+    }
+  }
