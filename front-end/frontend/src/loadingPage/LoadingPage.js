@@ -8,7 +8,11 @@ function LoadingPage(){
   window.onpopstate = function(event) {
     window.location.reload();
 };
-  return( <Header></Header>
+  return( 
+    <div className={styles.LoadingPage}>
+      <div className={styles.spacing}></div>
+      <Header></Header>
+    </div>
 );
 }
 

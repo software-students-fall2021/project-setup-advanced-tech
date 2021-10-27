@@ -1,0 +1,14 @@
+[
+    {
+    "firstname": "test",
+    "lastname": "test",
+    "email": "test@att.net",
+    "allergies": ["malt extract", "stuff"]
+    },
+{
+    "firstname": "foo",
+    "lastname": "bar",
+    "email": "foobar@yahoo.edu",
+    "allergies": ["oxygen"]
+}
+]

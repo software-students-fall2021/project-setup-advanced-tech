@@ -1,20 +1,59 @@
 .Contactus {}
 
-.firstnameLastname{
-    width: 30%;
+.Contactus form{
+    background-color: lightpink;
+    margin: auto;
+    width: 75%;
+}
+
+.Contactus .firstnameLastname{
+    width: 60%;
     display: flex;
     margin: auto;
     justify-content: space-between;
 }
 
-.email{
-    margin-top: 100px;
+.Contactus .firstnameLastname .name{
+    width: 40%;
 }
 
-.message{
-    margin-top: 100px;
+.Contactus .firstnameLastname .name input{
+    text-align: center;
+    width: 100%;
+    height: 30px;
 }
 
-.spacing{
+.Contactus .email{
+    margin-top: 50px;
+}
+
+.Contactus .email input{
+    text-align: center;
+    width: 25%;
+    height: 30px;
+}
+
+.Contactus .message{
+    margin-top: 0px;
+}
+
+.Contactus .message input{
+    text-align: center;
+    height: 100px;
+    width: 25%;
+}
+
+.Contactus .spacing{
     height: 20px;
+}
+
+.Contactus button{
+    background-color: white;
+    width: 25%;
+    height: 40px;
+}
+
+.Contactus button:hover{
+    background-color: darkcyan;
+    color: white;
 }

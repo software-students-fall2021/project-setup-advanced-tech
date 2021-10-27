@@ -4,32 +4,48 @@ import styles from './Contactus.module.css';
 
 const Contactus = () => (
   <div className={styles.Contactus}>
+    <div className={styles.spacing}></div>
+    <div className={styles.spacing}></div>
+    <div className={styles.spacing}></div>
+    <div className={styles.spacing}></div>
     <form>
+      <div className={styles.spacing}></div>
       <h2>Contact the team.</h2>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
       <div className={styles.firstnameLastname}>
-        <div className="name">
+        <div className={styles.name}>
           <h3>First Name *</h3>
-          <input type="text" value="Enter your first name."></input>
+          <div className={styles.spacing}></div>
+          <input type="text" placeholder="Enter your first name."></input>
         </div>
-        <div className="name">
+        <div className={styles.name}>
           <h3>Last Name *</h3>
-          <input type="text" value="Enter your last name."></input>
+          <div className={styles.spacing}></div>
+          <input type="text" placeholder="Enter your last name."></input>
         </div>
       </div>
       <div className={styles.email}>
         <div className="name">
           <h3>Email *</h3>
-          <input type="text" value="Enter your email."></input>
-        </div>
-      </div>
-      <div className={styles.message}>
-        <div className="name">
-          <h3>Message *</h3>
-          <input type="text" value="Enter your message."></input>
+          <div className={styles.spacing}></div>
+          <input type="text" placeholder="Enter your email."></input>
         </div>
       </div>
       <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
+      <div className={styles.message}>
+        <div className="name">
+          <h3>Message *</h3>
+          <div className={styles.spacing}></div>
+          <input type="text" placeholder="Enter your message."></input>
+        </div>
+      </div>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
       <button>Submit.</button>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
     </form>
   </div>
 );

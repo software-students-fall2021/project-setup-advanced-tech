@@ -5,9 +5,11 @@ import styles from './Signin.module.css';
 function Signin(){ 
   return(
       <div className={styles.Signin}>
+        <div className={styles.spacing}></div>
+          <div className={styles.spacing}></div>
         <form>
-          <div className={styles.spacing}></div>
-          <div className={styles.spacing}></div>
+        <div className={styles.spacing}></div>
+          <h2>Sign in.</h2>
           <div className={styles.spacing}></div>
           <div className={styles.spacing}></div>
           <div className={styles.input}>
@@ -24,6 +26,8 @@ function Signin(){
           <div className={styles.spacing}></div>
           <div className={styles.spacing}></div>
           <button>Sign in.</button>
+          <div className={styles.spacing}></div>
+          <div className={styles.spacing}></div>
         </form>
       </div>
 );

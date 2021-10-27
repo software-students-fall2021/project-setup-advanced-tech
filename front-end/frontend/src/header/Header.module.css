@@ -1,5 +1,8 @@
 .header{
     text-align: center;
+    background-color: lightpink;
+    width: 75%;
+    margin: auto;
 }
 .logoaccount{
     width: 50%;
@@ -24,7 +27,7 @@
     width: 15%;
 }
 
-.searchsearch{
+.searchsearch form {
     width: 50%;
     display: flex;
     align-items: center;
@@ -32,11 +35,25 @@
     margin: auto;
 }
 
-.searchsearch > h2{
-    height: 100%;
-    width: 50%;
-}
-
 .spacing{
     height: 20px;
+}
+
+.header input{
+    height: 50px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    text-align: center;
+    width: 75%;
+}
+
+.header .searchsearch button{
+    margin: 0;
+    width: 20%;
+}
+
+.header .filters button{
+    width: 20%;
 }

@@ -13,12 +13,13 @@ const Resetpassword = () => (
     <form>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
+      <h2>Reset password.</h2>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
       <div className={styles.input}>
         <h2>Email.</h2>
-        <input type="text" value="Please enter your email."></input>
+        <input type="text" placeholder="Please enter your email."></input>
       </div>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
