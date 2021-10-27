@@ -6,11 +6,11 @@
     display: flex;
     margin: auto;
     justify-content: space-between;
-    width: 50%;
+    width: 60%;
 }
 .Signin .input > input{
     padding: 10px;
-    width: 50%;
+    width: 60%;
     text-align: center;
 }
 
@@ -33,3 +33,19 @@
 .spacing{
     height: 20px;
 }
+
+@media only screen and (max-width: 768px) {
+    .Signin .input{
+        display: flex;
+        flex-direction: column;
+    }
+    .Signin .input > *{
+        margin: auto;
+    }
+
+    .Signin .input > input{
+        padding: 10px;
+        width: 70%;
+        text-align: center;
+    }
+  }

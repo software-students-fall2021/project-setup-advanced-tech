@@ -9,6 +9,10 @@
   width: 100%;
 }
 
+.welcomeHeader button{
+  width: 50%;
+}
+
 .welcomeHeader > *{
   text-align: center;
   justify-content: center;
@@ -37,4 +41,11 @@
 
 .spacing{
   height: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .welcomeHeader button{
+    font-size: 20px;
+    width: 50%;
+  }
 }
