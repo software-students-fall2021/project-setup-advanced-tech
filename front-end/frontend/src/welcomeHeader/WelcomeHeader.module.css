@@ -1,0 +1,40 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.welcomeHeader{
+  width: 100%;
+}
+
+.welcomeHeader > *{
+  text-align: center;
+  justify-content: center;
+  font-family: optima;
+}
+
+.welcomeHeader > h1{
+  font-size: 50px;
+}
+
+.welcomeHeader > h2{
+  font-size: 25px;
+}
+
+.signin{
+  height: 30px;
+}
+
+#first{
+  margin-top: 150px;
+}
+
+#second{
+  margin-top: 100px;
+}
+
+.spacing{
+  height: 20px;
+}

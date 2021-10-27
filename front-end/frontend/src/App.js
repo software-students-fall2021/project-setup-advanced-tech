@@ -1,7 +1,11 @@
 
+import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Dishes from './Dishes';
+import { useState } from 'react';
+import WelcomeHeader from './welcomeHeader/WelcomeHeader';
+import LoadingPage from './loadingPage/LoadingPage';
+import AccountSignIn from './accountSignIn/AccountSignIn';
+import {Route, Link} from 'react-router-dom';
 
 const backupData = [
   {
@@ -22,8 +26,8 @@ const data=backupData[0]
 console.log(data)
 function App() {
   return (
-    <div className="homePage">
-      <Dishes key="1" details={data} />
+    <div className="App">
+      <WelcomeHeader/>
     </div>
   );
 }
