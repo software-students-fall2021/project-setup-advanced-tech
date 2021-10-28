@@ -26,8 +26,8 @@ function Header(){
   }
 
   function searchFood(event){
-    toggleSearch(false)
     event.preventDefault();
+    toggleSearch(false)
     console.log(diet);
     axios.get("./restaurants.json")
     .then(response => {setRestaurant(response.data)});
