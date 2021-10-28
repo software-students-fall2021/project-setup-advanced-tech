@@ -9,6 +9,10 @@
   width: 100%;
 }
 
+.welcomeMessage{
+  background-color: lightpink;
+}
+
 .welcomeHeader button{
   width: 50%;
 }

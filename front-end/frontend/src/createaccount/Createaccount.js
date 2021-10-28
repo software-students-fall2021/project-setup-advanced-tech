@@ -42,6 +42,12 @@ const Createaccount = () => (
       </div>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
+      <div className={styles.allergy}>
+        <h2>Allergy input.</h2>
+        <input type="text" placeholder="Please input your allergies."></input>
+      </div>
+      <div className={styles.spacing}></div>
+      <div className={styles.spacing}></div>
       <button>Sign in.</button>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>

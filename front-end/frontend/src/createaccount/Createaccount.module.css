@@ -35,6 +35,12 @@
     width: 100%;
 }
 
+.Createaccount .allergy > input{
+    width: 80%;
+    text-align: center;
+    height: 150px;
+}
+
 .Createaccount button{
     background-color: white;
     width: 20%;

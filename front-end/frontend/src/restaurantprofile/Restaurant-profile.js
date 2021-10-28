@@ -9,7 +9,7 @@ const Restaurantprofile = (props) => (
       <h3>Telephone: {props.telephone}</h3>
       <h3>Address: {props.address}</h3>
     </div>
-    <div class={styles.spacing}></div>
+    <div className={styles.spacing}></div>
     <button>Uber</button>
     <button>DoorDash</button>
     <button>GrubHub</button>

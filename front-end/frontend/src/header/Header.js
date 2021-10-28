@@ -26,10 +26,10 @@ function Header(){
   }
 
   function searchFood(event){
-    toggleSearch(false)
     event.preventDefault();
+    toggleSearch(false)
     console.log(diet);
-    axios.get("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0")
+    axios.get("./restaurants.json")
     .then(response => {setRestaurant(response.data)});
   }
 
