@@ -24,6 +24,7 @@ const backupData = [
 ]
 const data=backupData[0]
 console.log(data)
+
 function App() {
   return (
     <div className="App">
