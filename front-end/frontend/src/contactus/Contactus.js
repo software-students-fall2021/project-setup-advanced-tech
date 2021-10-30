@@ -17,19 +17,19 @@ const Contactus = () => (
         <div className={styles.name}>
           <h3>First Name *</h3>
           <div className={styles.spacing}></div>
-          <input type="text" placeholder="Enter your first name."></input>
+          <input type="text" name = "first_name" placeholder="Enter your first name."></input>
         </div>
         <div className={styles.name}>
           <h3>Last Name *</h3>
           <div className={styles.spacing}></div>
-          <input type="text" placeholder="Enter your last name."></input>
+          <input type="text" name = "last_name" placeholder="Enter your last name."></input>
         </div>
       </div>
       <div className={styles.email}>
         <div className="name">
           <h3>Email *</h3>
           <div className={styles.spacing}></div>
-          <input type="text" placeholder="Enter your email."></input>
+          <input type="text" name = "email" placeholder="Enter your email."></input>
         </div>
       </div>
       <div className={styles.spacing}></div>
@@ -38,7 +38,7 @@ const Contactus = () => (
         <div className="name">
           <h3>Message *</h3>
           <div className={styles.spacing}></div>
-          <input type="text" placeholder="Enter your message."></input>
+          <input type="text" name = "message" placeholder="Enter your message."></input>
         </div>
       </div>
       <div className={styles.spacing}></div>
