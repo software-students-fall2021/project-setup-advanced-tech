@@ -21,8 +21,12 @@ app.get("/login", (req, res, next) => {
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
 
-    if (!(req.body.first_pass === req.body.second_pass)) 
+    if (!(req.body.first_pass === req.body.second_pass)){
+        res.send("Sorry -- please give matching passwords.")
+        console.log("Passwords didn't match.")
         return
+    } 
+        
     
     const name = req.body.first_name + req.body.last_name 
     const email = req.body.email
