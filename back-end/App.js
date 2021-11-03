@@ -7,24 +7,37 @@ app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
 //when the user signs in 
-app.get("/login", (req, res, next) => {
-    axios
-        .get("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0")
+app.post("/login", (req, res, next) => {
+    axios.post("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0")
         .then(apiResponse => {
-            res.json(apiResponse.data)
+            res.status(200).json(
+                {"message": "Success",
+                "data": apiResponse.data
+            })
             console.log("Successfully logged in user!") //should be checked if the password and username don't match or exist; will do in next sprint
         })
         .catch((err) => {
-            console.log("Sorry -- couldn't log in user!")
-        })
-})
+            res.status(400).json({
+                "message": "Failure",
+                "data": JSON.stringify(req.body)
+            })
+            console.log("POST request unsuccessful")
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
 
     if (!(req.body.first_pass === req.body.second_pass)){
-        res.send("Sorry -- please give matching passwords.")
-        console.log("Passwords didn't match.")
-        return
+        res.status(400).json({
+            "message": "Failure",
+            "data": JSON.stringify(req.body)
+        })
+        console.log("Passwords do not match");
+    }
+    else if (req.body.email === null || req.body.email === ''){
+        res.status(400).json({
+            "message": "Failure",
+            "data": JSON.stringify(req.body)
+        })
+        console.log("Email cannot be null.");
     } 
         
     
@@ -33,8 +46,19 @@ app.post("/createaccount", (req, res) => {
     const password = req.body.first_pass
     const allergies = req.body.allergies
 
-    res.json(allergies)
-    console.log("Successfully created account!")
+    const obj = {
+        "firstname": req.body.first_name,
+        "lastname": req.body.last_name,
+        "email": req.body.email,
+        "allergies": req.body.allergies
+    }
+    res.status(200).json(
+        {
+            "message": "Success",
+            "data": req.body
+        }
+        )
+        console.log("Succesful registration");
     
 })
 //User wants to  reset password
@@ -42,11 +66,20 @@ app.post("/resetpassword", (req, res) => {
     axios
         .get() //use mockaroo data for sending email
         .then(apiResponse => {
-            res.json(apiResponse.data)
-            console.log("Sent email!")
+            res.status(200).json({
+                "message" : "Success",
+                "data": apiResponse.data
+            })
+            console.log("Successfully sent request to reset password.")
         })
         .catch((err) => {
-            console.log("Couldn't fine email! Whoops!") //should be the case if can't find email in database; will do in next sprint
+            res.status(400).json({
+                "message": "Failure",
+                "data": req.body
+            }) //should be the case if can't find email in database; will do in next sprint
+            console.log("Failure to receive request to reset password");
+            res.json(apiResponse.data)
+            console.log("Sent email!")
         })
 })
 
@@ -55,25 +88,32 @@ app.post("/contact-us", (req, res) => {
     const name = req.body.first_name + req.body.last_name
     const email = req.body.email //need to verify email
     const message = req.body.message //need to store message somewhere
-
-    res.json(message)
-    console.log("successfully sent message")
+    res.status(200).json(
+        {
+        "message": "Success",
+        "data": req.body
+        })
+    console.log("Successfully send message.");
 })
 
 
 //if the user just searches for restaurants without parameters
 app.get("/restaurants", (req, res, next) => {
-
-
     axios
         .get("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0")
         .then(apiResponse => {
-            res.json(apiResponse.data)
-            console.log("Request made to /restaurants")
+            res.status(200).json({
+                "message": "Success",
+                "data": apiResponse.data
+            })
+            console.log("Request to fetch restaurants successful.");
         }) // pass data along directly to client
         .catch((err) => {
             // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan
-            console.log(`Mockaroo didn't work!`)
+            res.status(400).json({
+                "message": "Failure"
+            })
+            console.log("Request to fetch restaurants failed.")
             //console.error(err) // the server returned an error... probably too many requests... until we pay!
     
             // make some backup fake data
@@ -94,9 +134,15 @@ app.get("/restaurants", (req, res, next) => {
                 "dishnum":89
               },
             ]
+            console.log("Backup data initialized.")
     
             setData(backupData)
-            res.json(backupData)
+            res.status(400).json(
+                {
+                "message": "Sent backup data",
+                "data": backupData
+            })
+            console.log("Sent backup data.");
           })
     
 })
@@ -112,15 +158,18 @@ app.post("/restaurants", (req, res, next) => {
     axios
         .get("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0") //THIS NEEDS TO BE CHANGED to reflect the filtering 
         .then(apiResponse => {
-            res.json(apiResponse.data)
-            console.log("Request made to /restaurants")
+            res.status(200).json({
+                "message": "Success",
+                "data": req.body
+            })
+            console.log("Successfully retrieved restaurants.");
         }) // pass data along directly to client
         .catch((err) => {
             // Mockaroo, which we're using for our Mock API, only allows 200 requests per day on the free plan
-            console.log(`Mockaroo didn't work!`)
             //console.error(err) // the server returned an error... probably too many requests... until we pay!
     
             // make some backup fake data
+            console.log("Failed to retrieve restaurants.");
             const backupData = [
               {
                 "id":1,
@@ -138,9 +187,14 @@ app.post("/restaurants", (req, res, next) => {
                 "dishnum":89
               },
             ]
-    
+            console.log("Backup data initialized.");
+
             setData(backupData)
-            res.json(backupData)
+            res.status(400).json({
+                "message": "Backup data sent",
+                "data": backupData
+            })
+            console.log("Backup data set.");
           })
     
 })
