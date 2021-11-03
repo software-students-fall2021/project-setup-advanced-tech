@@ -6,6 +6,7 @@ import WelcomeHeader from './welcomeHeader/WelcomeHeader';
 import LoadingPage from './loadingPage/LoadingPage';
 import AccountSignIn from './accountSignIn/AccountSignIn';
 import {Route, Link} from 'react-router-dom';
+import Search from './Search'
 
 const backupData = [
   {
@@ -28,6 +29,7 @@ function App() {
   return (
     <div className="App">
       <WelcomeHeader/>
+      <Search></Search>
     </div>
   );
 }

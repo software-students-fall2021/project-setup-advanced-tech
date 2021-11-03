@@ -27,7 +27,7 @@ const Dishes = (props) => {
               <h3>{props.details.name}</h3>
             </Col>
             <Col>
-            <Button><span>{props.details.collection}</span><span>Collect</span></Button>
+            <Button>{props.details.collection}Collect</Button>
             </Col>
           </Row>
           <Row>
