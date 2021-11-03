@@ -10,9 +10,9 @@ const Restaurantprofile = (props) => (
       <h3>Address: {props.address}</h3>
     </div>
     <div className={styles.spacing}></div>
-    <button>Uber</button>
-    <button>DoorDash</button>
-    <button>GrubHub</button>
+    <button className={styles.order}>Uber</button>
+    <button className={styles.order}>DoorDash</button>
+    <button class={styles.order}>GrubHub</button>
   </div>
 );
 
