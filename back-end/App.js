@@ -22,8 +22,6 @@ app.post("/login", (req, res, next) => {
                 "data": JSON.stringify(req.body)
             })
             console.log("POST request unsuccessful")
-        })
-})
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
 
@@ -61,7 +59,7 @@ app.post("/createaccount", (req, res) => {
         }
         )
         console.log("Succesful registration");
-
+    
 })
 //User wants to  reset password
 app.post("/resetpassword", (req, res) => {
@@ -80,6 +78,8 @@ app.post("/resetpassword", (req, res) => {
                 "data": req.body
             }) //should be the case if can't find email in database; will do in next sprint
             console.log("Failure to receive request to reset password");
+            res.json(apiResponse.data)
+            console.log("Sent email!")
         })
 })
 
@@ -88,12 +88,12 @@ app.post("/contact-us", (req, res) => {
     const name = req.body.first_name + req.body.last_name
     const email = req.body.email //need to verify email
     const message = req.body.message //need to store message somewhere
-
     res.status(200).json(
         {
         "message": "Success",
         "data": req.body
         })
+    console.log("Successfully send message.");
 })
 
 
@@ -142,6 +142,7 @@ app.get("/restaurants", (req, res, next) => {
                 "message": "Sent backup data",
                 "data": backupData
             })
+            console.log("Sent backup data.");
           })
     
 })
@@ -193,6 +194,7 @@ app.post("/restaurants", (req, res, next) => {
                 "message": "Backup data sent",
                 "data": backupData
             })
+            console.log("Backup data set.");
           })
     
 })

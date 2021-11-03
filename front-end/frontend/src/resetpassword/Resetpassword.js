@@ -19,7 +19,7 @@ const Resetpassword = () => (
       <div className={styles.spacing}></div>
       <div className={styles.input}>
         <h2>Email.</h2>
-        <input type="text" placeholder="Please enter your email."></input>
+        <input type="text" name= "email" placeholder="Please enter your email."></input>
       </div>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
