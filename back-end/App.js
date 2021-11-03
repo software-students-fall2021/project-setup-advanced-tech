@@ -7,7 +7,7 @@ app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
 //when the user signs in 
-app.get("/login", (req, res, next) => {
+app.get('/login', (req, res) => {
     axios
         .get("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0")
         .then(apiResponse => {
@@ -19,7 +19,7 @@ app.get("/login", (req, res, next) => {
         })
 })
 //when the user creates an account
-app.post("/createaccount", (req, res) => {
+app.post('/createaccount', (req, res) => {
 
     if (!(req.body.first_pass === req.body.second_pass)){
         res.send("Sorry -- please give matching passwords.")
@@ -38,9 +38,9 @@ app.post("/createaccount", (req, res) => {
     
 })
 //User wants to  reset password
-app.post("/resetpassword", (req, res) => {
+app.post('/resetpassword', (req, res) => {
     axios
-        .get() //use mockaroo data for sending email
+        .get("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0") //use mockaroo data for sending email
         .then(apiResponse => {
             res.json(apiResponse.data)
             console.log("Sent email!")
@@ -51,7 +51,7 @@ app.post("/resetpassword", (req, res) => {
 })
 
 //User wants to contact us
-app.post("/contact-us", (req, res) => {
+app.post('/contact-us', (req, res) => {
     const name = req.body.first_name + req.body.last_name
     const email = req.body.email //need to verify email
     const message = req.body.message //need to store message somewhere
@@ -62,8 +62,7 @@ app.post("/contact-us", (req, res) => {
 
 
 //if the user just searches for restaurants without parameters
-app.get("/restaurants", (req, res, next) => {
-
+app.get('/restaurants', (req, res) => {
 
     axios
         .get("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0")
@@ -102,7 +101,7 @@ app.get("/restaurants", (req, res, next) => {
 })
 
 //if the user searches for restaurants with location, rating, type, and allergies; Route probably has to be changed
-app.post("/restaurants", (req, res, next) => {
+app.post('/restaurants', (req, res) => {
 
     const location = req.body.location
     const rating = req.body.rating
