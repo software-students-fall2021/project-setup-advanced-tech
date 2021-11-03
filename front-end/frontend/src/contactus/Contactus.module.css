@@ -17,6 +17,10 @@
     width: 40%;
 }
 
+.Contactus .firstnameLastname .name h3{
+    text-align: center;
+}
+
 .Contactus .firstnameLastname .name input{
     text-align: center;
     width: 100%;
@@ -27,9 +31,17 @@
     margin-top: 50px;
 }
 
+.Contactus .email > *{
+    text-align: center;
+}
+
+.Contactus .message > *{
+    text-align: center;
+}
+
 .Contactus .email input{
     text-align: center;
-    width: 25%;
+    width: 30%;
     height: 30px;
 }
 
@@ -40,7 +52,7 @@
 .Contactus .message input{
     text-align: center;
     height: 100px;
-    width: 25%;
+    width: 50%;
 }
 
 .Contactus .spacing{
