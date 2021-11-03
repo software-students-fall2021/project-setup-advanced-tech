@@ -13,14 +13,20 @@
   background-color: lightpink;
 }
 
-.welcomeHeader button{
+.welcomeHeader .welcomeButton{
   width: 50%;
+  display: block;
+  margin: auto;
+  font-size: 25px;
 }
 
 .welcomeHeader > *{
+  font-family: optima;
+}
+
+.welcomeHeader > .welcomeMessage{
   text-align: center;
   justify-content: center;
-  font-family: optima;
 }
 
 .welcomeHeader > h1{
@@ -48,7 +54,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .welcomeHeader button{
+  .welcomeHeader .welcomeButton{
     font-size: 20px;
     width: 50%;
   }

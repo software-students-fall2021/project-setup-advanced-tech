@@ -1,18 +1,19 @@
-.Restaurant-profile {
+.Restaurantprofile {
     text-align: center;
 }
 
-.Resetpassword button{
-    background-color: white;
-    width: 20%;
-    height: 40px;
-}
-
-.Resetpassword button:hover{
-    background-color: darkcyan;
-    color: white;
+.Restaurantprofile button{
+    display: block;
+    margin: auto;
+    font-size: 20px;
 }
 
 .spacing{
     height: 20px;
 }
+
+@media only screen and (max-width: 768px) {
+    .Restaurantprofile button{
+      height: 30px;
+    }
+  }

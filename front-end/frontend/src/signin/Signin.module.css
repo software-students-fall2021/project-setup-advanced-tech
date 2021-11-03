@@ -2,6 +2,10 @@
     width: 75%;
     margin: auto;
 }
+
+.Signin h2{
+    text-align: center;
+}
 .Signin .input{
     display: flex;
     margin: auto;

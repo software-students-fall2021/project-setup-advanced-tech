@@ -27,9 +27,9 @@ function WelcomeHeader(){
       <h2><i>A place for all your dietary needs.</i></h2>
     </div>
     <Route path="/login-create-account" component={AccountSignIn}></Route>
-    {toggled && window.location.href==="http://localhost:3000/" ? <Link to="/login-create-account"><button className="buttonWelcome" id={styles.first}onClick={changePage}>Sign in/Create account</button></Link>: null}
+    {toggled && window.location.href==="http://localhost:3000/" ? <Link to="/login-create-account"><button className={styles.welcomeButton} id={styles.first}onClick={changePage}>Sign in/Create account</button></Link>: null}
     <Route path="/explore" component={LoadingPage}></Route>
-    {explore && toggled && window.location.href==="http://localhost:3000/"? <Link to="/explore"><button className="buttonWelcome" id={styles.second}onClick={explorePage}>Explore Restaurants.</button></Link>: null};
+    {explore && toggled && window.location.href==="http://localhost:3000/"? <Link to="/explore"><button className={styles.welcomeButton} id={styles.second}onClick={explorePage}>Explore Restaurants.</button></Link>: null};
   </header>
 );
 }

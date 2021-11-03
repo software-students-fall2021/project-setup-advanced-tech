@@ -72,8 +72,11 @@
     }
 
     .filters{
-        flex-direction: column;
         width: 100%;
+        flex-direction: column;
+    }
+    .filters > *{
+        margin: auto;
     }
 
     .header .filters > button{
