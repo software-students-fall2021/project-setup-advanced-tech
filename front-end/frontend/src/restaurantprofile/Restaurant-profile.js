@@ -12,7 +12,7 @@ const Restaurantprofile = (props) => (
     <div className={styles.spacing}></div>
     <button className={styles.order}>Uber</button>
     <button className={styles.order}>DoorDash</button>
-    <button class={styles.order}>GrubHub</button>
+    <button className={styles.order}>GrubHub</button>
   </div>
 );
 

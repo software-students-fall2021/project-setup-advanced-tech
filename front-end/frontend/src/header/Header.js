@@ -14,14 +14,17 @@ function Header(){
   const[searched, toggleSearch] = useState(false);
 
   function setRestaurant(data){
+    setRestaurantsList([]);
+    const restaurants_updated = []
+    let key = 0;
     for (let i = 0; i < data.length; i++){
-      restaurants.push(<Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={i}/>);
-      restaurants.push(<div className={styles.spacing} key={i+3}></div>);
-      restaurants.push(<RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={i+2}/> )
-      restaurants.push(<div className={styles.spacing} key={i+1}></div>);
-
+      restaurants_updated.push(<Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key}/>);
+      restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
+      restaurants_updated.push(<RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/> )
+      restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
+      key+=5
     }
-    setRestaurantsList([...restaurants]);
+    setRestaurantsList(restaurants_updated);
     toggleSearch(true);
   }
 
