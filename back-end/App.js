@@ -98,7 +98,7 @@ app.post("/contact-us", (req, res) => {
 
 
 //if the user just searches for restaurants without parameters
-app.get("/restaurants", (req, res, next) => {
+app.get("/restaurants", (req, res) => {
     axios
         .get("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0")
         .then(apiResponse => {
@@ -148,7 +148,7 @@ app.get("/restaurants", (req, res, next) => {
 })
 
 //if the user searches for restaurants with location, rating, type, and allergies; Route probably has to be changed
-app.post("/restaurants", (req, res, next) => {
+app.post("/restaurants", (req, res) => {
 
     const location = req.body.location
     const rating = req.body.rating
