@@ -6,10 +6,9 @@ import WelcomeHeader from './welcomeHeader/WelcomeHeader';
 import LoadingPage from './loadingPage/LoadingPage';
 import AccountSignIn from './accountSignIn/AccountSignIn';
 import {Route, Link} from 'react-router-dom';
-import Search from './Search'
-import Restaurant from './Restaurant';
-import Dishes from './Dishes';
-import DishesDisplay from './DishesDisplay';
+//import Search from './Search'
+import RestaurantList from './restaurantPreview/RestaurantList';
+import Restaurant from './restaurantprofile/Restaurant';
 
 const backupData = [
   {
@@ -36,6 +35,7 @@ console.log(data)
 function App() {
   return (
     <div>
+      <RestaurantList order="1" state="NY" city="New York"></RestaurantList>
       <Restaurant id="3"/>
     </div>
   );
