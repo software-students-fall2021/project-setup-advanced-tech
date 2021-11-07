@@ -1,0 +1,6 @@
+.DishesDisplay {
+}
+.dishes {
+  display: flex;
+  flex-wrap: wrap;
+}
