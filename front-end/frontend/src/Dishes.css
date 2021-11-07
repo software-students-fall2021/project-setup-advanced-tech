@@ -1,0 +1,31 @@
+.image {
+  height: 100%;
+  width: 100%;
+}
+
+.imageBox {
+  display: inline-block;
+  height: 90px;
+  width: 90px;
+  vertical-align: top;
+  text-align: left;
+}
+
+.word {
+  padding-left: 10px;
+  display: inline-block;
+  height: auto;
+}
+
+.box {
+  border: 2px #eee solid;
+  background-color: aqua;
+  margin: auto;
+  width: auto;
+  height: auto;
+  padding: 15px;
+}
+
+.ingredients {
+  word-wrap: break-word;
+}

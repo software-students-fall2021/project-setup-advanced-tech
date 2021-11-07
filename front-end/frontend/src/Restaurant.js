@@ -8,9 +8,8 @@ import {Col} from 'react-bootstrap'
 import DishesDisplay from './DishesDisplay'
 import RestaurantPreview from './RestaurantPreview'
 import { Image } from 'react-bootstrap';
+import "./Restaurant.css"
 // import logo from './logo.svg';
-// import './AnimalsList.css'
-// import AnimalPreview from './AnimalPreview'
 
 
 const Restaurant = (props) => {
@@ -53,72 +52,37 @@ const Restaurant = (props) => {
         setData(backupData[0])
       })
   }, [props.id]) // only run it once!
-
-  /*return (
-    <Container className="restaurant">
-    <Button>Back</Button>
-    <Jumbotron>
-      <Row>
-        <Col xs={6} md={1}>{props.details.name}</Col>
-        <Col>
-          <Button>Collect</Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={6} md={1}>Collections:{props.details.collection}</Col>
-        <Col>{props.details.city},{props.details.state}</Col>
-      </Row>
-      <Row>
-        <Col xs={6} md={4}>
-          <Image src="https://picsum.photos/100" thumbnail />
-        </Col>
-        <Col xs={6} md={4}>
-          <Image src="https://picsum.photos/100" thumbnail />
-        </Col>
-        <Col xs={6} md={4}>
-          <Image src="https://picsum.photos/100" thumbnail />
-        </Col>
-      </Row>
-      <p>Opertaion time: {props.details.start}-{props.details.end}</p>
-      <p>Address: {props.details.address}</p>
-      <p>Telephone: {props.details.telephone}</p>
-    </Jumbotron>
-    <Jumbotron>
-      <h1>Dishes</h1>
-      <DishesDisplay id={props.details.id}></DishesDisplay>
-    </Jumbotron>
-    </Container>*/
+  
   return (
     <Container className="restaurant">
-    <Button>Back</Button>
-    <Jumbotron>
-      <Row>
-        <Col xs={6} md={1}>{data.name}</Col>
-        <Col>
-          <Button>Collect</Button>
+    <div className="section">
+    <Button className="back">Back</Button>
+    </div>
+    <div>
+      <div className="section">
+        <p>{data.name}<Button className="button">Collect</Button></p>
+      </div>
+      <div className="section">
+        <div>Collections:{data.collection}</div>
+        <div className="city">{data.city},{data.state}</div>
+      </div>
+      <Row className="section">
+        <Col className="imageBox" >
+          <Image src="https://picsum.photos/100" rounded />
         </Col>
-      </Row>
-      <Row>
-        <Col xs={6} md={1}>Collections:{data.collection}</Col>
-        <Col>{data.city},{data.state}</Col>
-      </Row>
-      <Row>
-        <Col xs={6} md={4}>
-          <Image src="https://picsum.photos/100" thumbnail />
+        <Col className="imageBox" >
+          <Image src="https://picsum.photos/100" rounded />
         </Col>
-        <Col xs={6} md={4}>
-          <Image src="https://picsum.photos/100" thumbnail />
-        </Col>
-        <Col xs={6} md={4}>
-          <Image src="https://picsum.photos/100" thumbnail />
+        <Col className="imageBox" >
+          <Image src="https://picsum.photos/100" rounded />
         </Col>
       </Row>
       <p>Opertaion time: {data.start}-{data.end}</p>
       <p>Address: {data.address}</p>
       <p>Telephone: {data.telephone}</p>
-    </Jumbotron>
+    </div>
     <Jumbotron>
-      <h1>Dishes</h1>
+      <h1 className="DishTitle">Dishes</h1>
       <DishesDisplay id={data.id}></DishesDisplay>
     </Jumbotron>
     </Container>

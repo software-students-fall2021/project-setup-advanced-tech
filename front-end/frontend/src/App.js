@@ -7,6 +7,9 @@ import LoadingPage from './loadingPage/LoadingPage';
 import AccountSignIn from './accountSignIn/AccountSignIn';
 import {Route, Link} from 'react-router-dom';
 import Search from './Search'
+import Restaurant from './Restaurant';
+import Dishes from './Dishes';
+import DishesDisplay from './DishesDisplay';
 
 const backupData = [
   {
@@ -26,11 +29,14 @@ const backupData = [
 const data=backupData[0]
 console.log(data)
 
+      //<WelcomeHeader/>
+      //<Search></Search>
+      //<div className="App">
+    //  </div>
 function App() {
   return (
-    <div className="App">
-      <WelcomeHeader/>
-      <Search></Search>
+    <div>
+      <Restaurant id="3"/>
     </div>
   );
 }
