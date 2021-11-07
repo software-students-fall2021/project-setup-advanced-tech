@@ -24,10 +24,9 @@ const RestaurantPreview = (props) => {
           <Row>
             <Col xs={5}>
               
-    <Link to={`/retaurant/${props.details.id}`}>
-              <h3 className="name">{props.details.name}</h3>
-              
-    </Link>
+            <Link to={`/retaurant/${props.details.id}`}>
+              <h3 className="name">{props.details.name}</h3> 
+            </Link>
             </Col>
             <Col>
             <Button className="button">Collect</Button>
