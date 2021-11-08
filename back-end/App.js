@@ -8,21 +8,11 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
-    axios.post("https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0")
-        .then(apiResponse => {
-            res.status(200).json(
-                {"message": "Success",
-                "data": apiResponse.data
-            })
-            console.log("Successfully logged in user!") //should be checked if the password and username don't match or exist; will do in next sprint
-        })
-        .catch((err) => {
-            res.status(400).json({
-                "message": "Failure",
-                "data": JSON.stringify(req.body)
-            })
-            console.log("POST request unsuccessful")
-        })
+    res.status(200).json(
+        {"message": "Success",
+        "data": req.body
+    })
+    console.log("Successfully logged in user!")
 })
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
