@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Header.module.css';
-import '../button.css';
 import axios from "axios";
 import Restaurant from '../restaurant/Restaurant';
 import { memo } from 'react';
 import RestaurantProfile from '../restaurantprofile/Restaurant-profile';
+import Signin from '../signin/Signin';
+import {Route, Link} from 'react-router-dom';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-function Header(){
+function Search(props){
 
   const [diet, setDiet] = useState("");
   const[restaurants, setRestaurantsList] = useState([]);
@@ -45,6 +47,7 @@ function Header(){
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <h2>Find the place that suits what you want.</h2>
+    {props.name != null ? <h3>Welcome, {props.name}</h3>: null}
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.logoaccount}>
@@ -80,13 +83,14 @@ function Header(){
     {searched ? <h2>Results for "{diet}"</h2>: null}
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
+    <div className={styles.spacing}></div>
     {restaurants}
   </header>
 );
 }
 
-Header.propTypes = {};
+Search.propTypes = {};
 
-Header.defaultProps = {};
+Search.defaultProps = {};
 
-export default Header;
+export default Search;

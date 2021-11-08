@@ -16,17 +16,24 @@
     padding: 10px;
     width: 60%;
     text-align: center;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .Signin form{
-    margin-top: 200px;
-    background-color: lightpink;
+    color: white;
 }
 
 .Signin form > button{
     width: 20%;
     height: 40px;
     background-color: white;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .Signin button:hover{
@@ -38,6 +45,27 @@
     height: 20px;
 }
 
+.Signin .options{
+    margin: auto;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+.Signin .options > button{
+    width: 50%;
+    height: 40px;
+    background-color: white;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    margin: auto auto 10px;
+}
+
+.Signin .options > button:hover{
+    background-color: darkcyan;
+    color: white;
+}
 @media only screen and (max-width: 768px) {
     .Signin .input{
         display: flex;

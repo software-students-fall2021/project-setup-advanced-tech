@@ -2,5 +2,22 @@
   "dependencies": {
     "bootstrap": "^5.1.3",
     "react-bootstrap": "^2.0.0"
-  }
+  },
+  "name": "project-setup-advanced-tech",
+  "description": "Weet is a mobile application that helps users with dietary restrictions (allergies, voluntary restrictions, etc.) find restaurants that cater to their needs.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/software-students-fall2021/project-setup-advanced-tech.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/software-students-fall2021/project-setup-advanced-tech/issues"
+  },
+  "homepage": "https://github.com/software-students-fall2021/project-setup-advanced-tech#readme"
 }

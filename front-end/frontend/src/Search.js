@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 // import logo from './logo.svg';
 import './Search.css'
-import RestaurantList from './RestaurantList'
+import RestaurantList from './RestaurantPreview/RestaurantList'
 import { Container } from 'react-bootstrap'
 import { Jumbotron } from 'reactstrap';
 import {Col} from 'react-bootstrap'
