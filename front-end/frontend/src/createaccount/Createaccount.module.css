@@ -3,7 +3,7 @@
 }
 
 .Createaccount form{
-    background-color: lightpink;
+    color: white;
     width: 75%;
     margin: auto;
 }
@@ -27,6 +27,10 @@
     width: 80%;
     text-align: center;
     height: 30px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 .Createaccount .firstlast > .input{
     width: 40%;
