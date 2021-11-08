@@ -65,26 +65,15 @@ app.post("/createaccount", (req, res) => {
 })
 //User wants to  reset password
 app.post("/resetpassword", (req, res) => {
-    axios
-        .get() //use mockaroo data for sending email
-        .then(apiResponse => {
-            res.status(200).json({
-                "message" : "Success",
-                "data": apiResponse.data
-            })
-            console.log("Successfully sent request to reset password.")
-        })
-        .catch((err) => {
-            res.status(400).json({
-                "message": "Failure",
-                "data": req.body
-            }) //should be the case if can't find email in database; will do in next sprint
-            console.log("Failure to receive request to reset password");
-        })
+    res.status(200).json({
+        "message" : "Success",
+        "data": req.body
+    })
+    console.log("Successfully sent request to reset password.")
 })
 
 //User wants to contact us
-app.post("/contact-us", (req, res) => {
+app.post("/contactus", (req, res) => {
     const name = req.body.first_name + req.body.last_name
     const email = req.body.email //need to verify email
     const message = req.body.message //need to store message somewhere
@@ -94,6 +83,7 @@ app.post("/contact-us", (req, res) => {
         "message": "Success",
         "data": req.body
         })
+    console.log("success to contact")
 })
 
 

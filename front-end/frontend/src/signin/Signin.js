@@ -5,6 +5,7 @@ import {Route, Link} from 'react-router-dom';
 import Resetpassword from '../resetpassword/Resetpassword';
 import Createaccount from '../createaccount/Createaccount';
 import Contactus from '../contactus/Contactus';
+const { default: axios } = require('axios')
 
 function Signin(props){ 
 
@@ -16,6 +17,7 @@ function Signin(props){
 
 const login = e => {
   e.preventDefault();
+  axios.post("/login").then(response => {console.log(response)})
   props.login(data)
 }
 
