@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './WelcomeHeader.module.css';
-import AccountSignIn from '../accountSignIn/AccountSignIn';
 import {Route, Link} from 'react-router-dom';
 import LoadingPage from '../loadingPage/LoadingPage';
-import '../button.css';
 import Signin from '../signin/Signin';
-function WelcomeHeader(){
+function LandingPage(){
   const [toggled, removeButton] = useState(true);
   const [explore, toggleExplore] = useState(true);
   function changePage(){
@@ -26,16 +24,12 @@ function WelcomeHeader(){
       <h1>Welcome to Weet.</h1>
       <h2><i>A place for all your dietary needs.</i></h2>
     </div>
-    <Route path="/login-create-account" component={AccountSignIn}></Route>
-    {toggled && window.location.href==="http://localhost:3000/" ? <Link to="/login-create-account"><button className="buttonWelcome" id={styles.first}onClick={changePage}>Sign in/Create account</button></Link>: null}
-    <Route path="/explore" component={LoadingPage}></Route>
-    {explore && toggled && window.location.href==="http://localhost:3000/"? <Link to="/explore"><button className="buttonWelcome" id={styles.second}onClick={explorePage}>Explore Restaurants.</button></Link>: null};
   </header>
 );
 }
 
-WelcomeHeader.propTypes = {};
+LandingPage.propTypes = {};
 
-WelcomeHeader.defaultProps = {};
+LandingPage.defaultProps = {};
 
-export default WelcomeHeader;
+export default LandingPage;

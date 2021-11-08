@@ -1,27 +1,32 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Header.module.css';
-import '../button.css';
 import axios from "axios";
 import Restaurant from '../restaurant/Restaurant';
 import { memo } from 'react';
 import RestaurantProfile from '../restaurantprofile/Restaurant-profile';
+import Signin from '../signin/Signin';
+import {Route, Link} from 'react-router-dom';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-function Header(){
+function Search(props){
 
   const [diet, setDiet] = useState("");
   const[restaurants, setRestaurantsList] = useState([]);
   const[searched, toggleSearch] = useState(false);
 
   function setRestaurant(data){
+    setRestaurantsList([]);
+    const restaurants_updated = []
+    let key = 0;
     for (let i = 0; i < data.length; i++){
-      restaurants.push(<Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={i}/>);
-      restaurants.push(<div className={styles.spacing} key={i+3}></div>);
-      restaurants.push(<RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={i+2}/> )
-      restaurants.push(<div className={styles.spacing} key={i+1}></div>);
-
+      restaurants_updated.push(<Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key}/>);
+      restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
+      restaurants_updated.push(<RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/> )
+      restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
+      key+=5
     }
-    setRestaurantsList([...restaurants]);
+    setRestaurantsList(restaurants_updated);
     toggleSearch(true);
   }
 
@@ -38,6 +43,7 @@ function Header(){
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <h2>Find the place that suits what you want.</h2>
+    {props.name != null ? <h3>Welcome, {props.name}</h3>: null}
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.logoaccount}>
@@ -73,13 +79,14 @@ function Header(){
     {searched ? <h2>Results for "{diet}"</h2>: null}
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
+    <div className={styles.spacing}></div>
     {restaurants}
   </header>
 );
 }
 
-Header.propTypes = {};
+Search.propTypes = {};
 
-Header.defaultProps = {};
+Search.defaultProps = {};
 
-export default Header;
+export default Search;

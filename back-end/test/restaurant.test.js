@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 const assert = require("assert");
 const { expect } = require('chai');
 const { response } = require('express');
-const { default: Createaccount } = require('../front-end/frontend/src/createaccount/Createaccount');
+const { default: Createaccount } = require('../../front-end/frontend/src/createaccount/Createaccount');
 //apiResponse is just a name; doesn't have to be that name
 let mockUser = {
     first_name: "Foo",
