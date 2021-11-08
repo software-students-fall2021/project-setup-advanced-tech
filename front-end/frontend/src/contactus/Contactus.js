@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Contactus.module.css';
+import axios from 'axios';
 
-const Contactus = () => (
+function Contactus(){
+  function contactTeam(){
+    const data = {name: "test"}
+    axios.post('http://localhost:3001/contactus', data)
+        .then(response => console.log(response));
+  }
+  return(
   <div className={styles.Contactus}>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
-    <form>
+    <form onSubmit={contactTeam}>
       <div className={styles.spacing}></div>
       <h2>Contact the team.</h2>
       <div className={styles.spacing}></div>
@@ -47,8 +54,8 @@ const Contactus = () => (
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
     </form>
-  </div>
-);
+  </div>)
+};
 
 Contactus.propTypes = {};
 

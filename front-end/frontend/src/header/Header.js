@@ -36,7 +36,7 @@ function Header(){
     event.preventDefault();
     toggleSearch(false)
     console.log(diet);
-    axios.get("./restaurants.json")
+    axios.get("http://localhost:3001/restaurants")
     .then(response => {setRestaurant(response.data)});
   }
 
