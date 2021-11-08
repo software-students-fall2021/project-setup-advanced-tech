@@ -6,6 +6,7 @@ import {Row} from 'react-bootstrap'
 import {Col} from 'react-bootstrap'
 import './Dishes.css'
 import {Button} from 'react-bootstrap'
+//import {Grid} from 'react-bootstrap'
 
 const Dishes = (props) => {
   // console.log(props);
@@ -17,24 +18,23 @@ const Dishes = (props) => {
 
   return (
     <>
-      <Jumbotron className="box">
-        <Col className="image" xs={3} md={3}>
-          <Image src={imgSrc} thumbnail/>
-        </Col>
-        <Col className="word" xs={3} md={3}>
+      <div className="box">
+        <div className="imageBox">
+          <Image className="image" src={imgSrc} rounded/>
+        </div>
+        <div className="word">
           <Row>
             <Col xs={5}>
-              <h3>{props.details.name}</h3>
+              <h3 className="name">{props.details.name}</h3>
             </Col>
             <Col>
-            <Button><span>{props.details.collection}</span><span>Collect</span></Button>
+            <Button className="button">{props.details.collection}Collect</Button>
             </Col>
           </Row>
-          <Row>
-            <p>{props.details.ingredients}</p>
-          </Row>
-        </Col>
-      </Jumbotron>
+          <p className="ingredients">ingredients: {props.details.ingredients}
+          </p>
+        </div>
+      </div>
     </>
   )
 }
