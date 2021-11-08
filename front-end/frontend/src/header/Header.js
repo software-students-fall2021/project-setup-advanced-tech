@@ -14,15 +14,19 @@ function Search(props){
   const [diet, setDiet] = useState("");
   const[restaurants, setRestaurantsList] = useState([]);
   const[searched, toggleSearch] = useState(false);
+  const[profileClicked, toggleProfile] = useState(false)
+  const profiles = []
 
   function setRestaurant(data){
     setRestaurantsList([]);
+    profiles = []
     const restaurants_updated = []
     let key = 0;
     for (let i = 0; i < data.length; i++){
-      restaurants_updated.push(<Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key}/>);
+      profiles.push(false)
+      restaurants_updated.push(!profiles[i] ? <Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key}/>: null);
       restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
-      restaurants_updated.push(<RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/> )
+      restaurants_updated.push(profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
       restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
       key+=5
     }
