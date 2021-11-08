@@ -6,6 +6,11 @@ require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
+// still lack Search restaurant by Id, Search city by state, Search Dish collection by user id, Search Restaurant collection by user id,
+// Search user by id, Add Restaurant, Add Dishes, Collect Dishes, Collect Restaurants, Delete Dishes Collections,
+// Delete Restaurant Collections, Delete Restaurant
+// We are still learning backend and deal with frontend work. So we will fill the blank in the future.
+
 //if the user just searches for restaurants without parameters
 // possible input 
 app.get('/restaurants', (req, res) => {
@@ -242,6 +247,7 @@ app.post("/restaurants", (req, res) => {
     })
 })
 
+//Search dishes by restaurant id, called in restaurant display pages
 app.get("/dishes/restaurant/:restuarant_id", (req, res) => {
     axios
         .get("https://my.api.mockaroo.com/dishes.json?key=a77dd4e0")
@@ -283,6 +289,7 @@ app.get("/dishes/restaurant/:restuarant_id", (req, res) => {
           })
 })
 
+// get dishes by dish id, called in dish profile pages
 app.get("/dishes/dish/:dishes_id", (req, res) => {
     axios
         .get("https://my.api.mockaroo.com/dishes.json?key=a77dd4e0")
