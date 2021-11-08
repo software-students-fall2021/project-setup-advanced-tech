@@ -51,7 +51,6 @@ app.get('/restaurants', (req, res) => {
     
 })
 
-
 //when the user signs in 
 app.get('/login', (req, res) => {
     axios
@@ -87,25 +86,15 @@ app.post('/createaccount', (req, res) => {
         console.log("Email cannot be null.");
     } 
         
-    
-    const name = req.body.first_name + req.body.last_name 
-    const email = req.body.email
-    const password = req.body.first_pass
-    const allergies = req.body.allergies
-
-    const obj = {
-        "firstname": req.body.first_name,
-        "lastname": req.body.last_name,
-        "email": req.body.email,
-        "allergies": req.body.allergies
+    let user = {
+     name: req.body.first_name + req.body.last_name, 
+     email: req.body.email,
+     password:  req.body.first_pass,
+     allergies:  req.body.allergies 
     }
-    res.status(200).json(
-        {
-            "message": "Success",
-            "data": req.body
-        }
-        )
-        console.log("Succesful registration");
+    //will put this in database
+    res.json(user)
+    console.log("Successfully created account!")
     
 })
 //User wants to  reset password
