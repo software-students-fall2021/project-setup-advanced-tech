@@ -11,6 +11,9 @@ import Signin from './signin/Signin';
 import Resetpassword from './resetpassword/Resetpassword';
 import Createaccount from './createaccount/Createaccount';
 import Contactus from './contactus/Contactus';
+//import Search from './Search'
+import RestaurantList from './restaurantPreview/RestaurantList';
+import Restaurant from './restaurantprofile/Restaurant';
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -25,6 +28,10 @@ const backupData =
 const data=backupData[0]
 console.log(data) 
 
+      //<WelcomeHeader/>
+      //<Search></Search>
+      //<div className="App">
+    //  </div>
 function App() {
 
   const [signin, renderSignin] = useState(false);
@@ -100,14 +107,9 @@ function App() {
 
 export default App;
 
-
-
 /**
- * <div className="landingPage">
-        <LandingPage/>
-        <button>
-          Explore Restaurants.
-        </button>
-      </div>
-      <Search ref={search}/>
-      */
+ * </div><div>
+      <RestaurantList order="1" state="NY" city="New York"></RestaurantList>
+      <Restaurant id="3"/>
+    </div>
+ */

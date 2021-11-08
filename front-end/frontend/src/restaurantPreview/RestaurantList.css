@@ -1,0 +1,15 @@
+.button {
+  height: auto;
+  width: auto;
+  border: 1px solid #eee;
+  margin: 3px 0;
+  float: right;
+}
+
+.back {
+  height: auto;
+  width: auto;
+  border: 1px solid #eee;
+  margin: 3px 0;
+  float: left;
+}
