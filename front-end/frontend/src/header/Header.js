@@ -15,7 +15,7 @@ function Search(props){
   const[restaurants, setRestaurantsList] = useState([]);
   const[searched, toggleSearch] = useState(false);
   const[profileClicked, toggleProfile] = useState(false)
-  const profiles = []
+  let profiles = []
 
   function setRestaurant(data){
     setRestaurantsList([]);
@@ -38,7 +38,7 @@ function Search(props){
     event.preventDefault();
     toggleSearch(false)
     console.log(diet);
-    axios.get("./restaurants.json")
+    axios.get("http://localhost:3001/restaurants")
     .then(response => {setRestaurant(response.data)});
   }
 
