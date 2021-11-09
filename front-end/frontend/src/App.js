@@ -42,6 +42,9 @@ function App() {
   const[signedin, setSignin] = useState(false);
 
   const [userdata, setUserdata] = useState(null)
+  const [reset, resetPassword] = useState(false)
+  const [created, createAccount] = useState(false)
+  const [contacted, contactUs] = useState(false)
 
   useEffect(() => {
     const divElement = elementRef.current;
@@ -54,6 +57,18 @@ function App() {
 
   function login(data){
     setUserdata(data)
+  }
+
+  function renderResetPassword(){
+    resetPassword(true)
+  }
+
+  function renderCreateAccount(){
+    createAccount(true)
+  }
+
+  function renderContactUs(){
+    contactUs(true)
   }
 
   function scrollTo(){
@@ -98,9 +113,9 @@ function App() {
             <Link to="/createaccount" style={{textDecoration: 'none'}}><button onClick={toggleCreateAccount}>Don't have an account? Create one.</button></Link>
             <Link to="/contactus" style={{textDecoration: 'none'}}><button onClick={toggleContactus}>Contact us.</button></Link>
           </div>: null}
-      {resetpassword ? <Resetpassword/>: null}
-      {createaccount ? <Createaccount/>: null}
-      {contactus ? <Contactus/>: null}
+      {resetpassword && !reset ? <Resetpassword reset={renderResetPassword}/>: null}
+      {createaccount && !created ?<Createaccount created={renderCreateAccount}/>: null}
+      {contactus && !contacted ? <Contactus contacted={renderContactUs}/>: null}
     </div>
   )
 }

@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Resetpassword.module.css';
+import {useHistory} from 'react-router-dom';
 const { default: axios } = require('axios')
 
-function Resetpassword(){ 
+function Resetpassword(props){ 
+  const history = useHistory()
 
   function resetpassword(e){
     e.preventDefault()
-    axios.post("/resetpassword").then(response => {console.log(response)})
+    axios.post("http://localhost:3001/resetpassword", {}).then(response => {console.log(response)})
+    props.reset();
+    history.push("/")
   }
   return(
   <div className={styles.Resetpassword}>

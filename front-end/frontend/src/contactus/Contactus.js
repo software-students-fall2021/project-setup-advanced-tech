@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Contactus.module.css';
+import {useHistory} from 'react-router-dom';
 const { default: axios } = require('axios')
 
-function Contactus(){
+function Contactus(props){
+  const history = useHistory()
+
   function contactTeam(e){
     e.preventDefault()
-    axios.post("/contactus").then(response => {console.log(response)})
+    axios.post("/contactus", {}).then(response => {console.log(response)})
+    history.push("/")
+    props.contacted();
+    
   }
   return(
   <div className={styles.Contactus}>
