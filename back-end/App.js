@@ -126,4 +126,3 @@ app.post("/restaurants", (req, res, next) => {
     
 })
 
-
