@@ -1,0 +1,60 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.welcomeHeader{
+  width: 100%;
+}
+
+.welcomeHeader .welcomeButton{
+  position: relative;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  top: 30%;
+  width: 20%;
+  height: 90px;
+  background-color: white;
+  font-size: 30px;
+}
+
+.welcomeHeader > *{
+  font-family: optima;
+}
+
+.welcomeHeader > .welcomeMessage{
+  text-align: center;
+  justify-content: center;
+  color: white;
+}
+
+.welcomeHeader > h1{
+  font-size: 50px;
+}
+
+.welcomeHeader > h2{
+  font-size: 25px;
+}
+
+.signin{
+  height: 30px;
+}
+
+.spacing{
+  height: 20px;
+}
+
+.welcomeHeader .welcomeButton:hover{
+  background-color: lightblue;
+  color: white;
+}
+@media only screen and (max-width: 768px) {
+  .welcomeHeader .welcomeButton{
+    font-size: 20px;
+    width: 50%;
+  }
+}

@@ -1,0 +1,102 @@
+.Contactus {}
+
+.Contactus form{
+    color: white;
+    margin: auto;
+    width: 75%;
+}
+
+.Contactus h2{
+    text-align: center;
+}
+
+.Contactus .firstnameLastname{
+    width: 60%;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.Contactus .firstnameLastname .name{
+    width: 40%;
+}
+
+.Contactus .firstnameLastname .name h3{
+    text-align: center;
+}
+
+.Contactus .firstnameLastname .name input{
+    text-align: center;
+    width: 100%;
+    height: 30px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.Contactus .email{
+    margin-top: 50px;
+}
+
+.Contactus .email > *{
+    text-align: center;
+}
+
+.Contactus .message > *{
+    text-align: center;
+}
+
+.Contactus .email input{
+    text-align: center;
+    width: 30%;
+    height: 30px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.Contactus .message{
+    margin-top: 0px;
+}
+
+.Contactus .message input{
+    text-align: center;
+    height: 100px;
+    width: 50%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.Contactus .spacing{
+    height: 20px;
+}
+
+.Contactus button{
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 25%;
+    height: 40px;
+}
+
+.Contactus button:hover{
+    background-color: darkcyan;
+    color: white;
+}
+
+@media only screen and (max-width: 768px) {
+    .Contactus .firstnameLastname{
+        flex-direction: column;
+        width: 75%;
+    }
+    
+    .Contactus .firstnameLastname *{
+        margin: auto;
+    }
+  }

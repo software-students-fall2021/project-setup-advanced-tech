@@ -1,0 +1,68 @@
+.Createaccount {
+    text-align: center;
+}
+
+.Createaccount form{
+    color: white;
+    width: 75%;
+    margin: auto;
+}
+
+.Createaccount .firstlast{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+}
+
+.Createaccount .spacing{
+    height: 20px;
+}
+
+.Createaccount form{
+    margin-top: 40px;
+}
+
+.Createaccount .input > input{
+    width: 80%;
+    text-align: center;
+    height: 30px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.Createaccount .firstlast > .input{
+    width: 40%;
+}
+.Createaccount .firstlast > .input > input{
+    width: 100%;
+}
+
+.Createaccount .allergy > input{
+    width: 80%;
+    text-align: center;
+    height: 150px;
+}
+
+.Createaccount button{
+    background-color: white;
+    width: 20%;
+    height: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+    .Createaccount .firstlast{
+        display: flex;
+        flex-direction: column;
+    }
+    .Createaccount .firstlast *{
+        margin: auto;
+    }
+    .Createaccount .firstlast .input input{
+        width: 75%;
+    }
+    .Createaccount .firstlast > .input{
+        width: 100%;
+    }
+  }
