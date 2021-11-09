@@ -71,7 +71,7 @@ function App() {
 
   return (
     <div className="App">
-      {!signin || (window.location.href === "http://localhost:3000/") ?  
+      {!signin && (window.location.href === "http://localhost:3000/") ?  
         <div className="landingPage">
           <LandingPage/>
           <button onClick={scrollTo}>
