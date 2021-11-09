@@ -26,7 +26,7 @@ function Search(props){
       profiles.push(false)
       restaurants_updated.push(!profiles[i] ? <Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key}/>: null);
       restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
-      restaurants_updated.push(profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
+      restaurants_updated.push(!profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
       restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
       key+=5
     }
