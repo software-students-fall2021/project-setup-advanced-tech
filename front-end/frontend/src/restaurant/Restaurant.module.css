@@ -1,12 +1,9 @@
 .Restaurant {
     margin: auto;
     width: 75%;
-    background-color: white;
 }
 
 .Restaurant:hover {
-    margin: auto;
-    width: 75%;
     cursor: pointer;
 }
 

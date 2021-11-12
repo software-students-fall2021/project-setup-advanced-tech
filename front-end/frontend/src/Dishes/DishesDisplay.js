@@ -12,7 +12,7 @@ const DishesDisplay = (props) => {
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log('fetching 10 random dishes...')
-    axios(`https://my.api.mockaroo.com/dishes.json?key=a77dd4e0?id=${props.id}`)
+    axios(`http://localhost:3001/dishes/dish/${props.id}`)
       .then((response) => {
         // extract the data from the server response
         setData(response.data)
@@ -27,16 +27,29 @@ const DishesDisplay = (props) => {
           {
             "id":1,
             "name":"Ahmed",
-            "ingredients":"OpnRV2Z",
+            "ingredients":"peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, ",
             "collections":78,
             "image":"http://dummyimage.com/190x100.png/ff4444/ffffff"
           },
           {
             "id":2,
             "name":"Mallorie",
-            "ingredients":"c6TwOSFE",
+            "ingredients":"peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, ",
             "collections":84,
             "image":"http://dummyimage.com/173x100.png/ff4444/ffffff"},
+            {
+              "id":1,
+              "name":"Ahmed",
+              "ingredients":"peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, ",
+              "collections":78,
+              "image":"http://dummyimage.com/190x100.png/ff4444/ffffff"
+            },
+            {
+              "id":2,
+              "name":"Mallorie",
+              "ingredients":"peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, peanuts, ",
+              "collections":84,
+              "image":"http://dummyimage.com/173x100.png/ff4444/ffffff"},
         ]
 
         setData(backupData)
@@ -47,7 +60,7 @@ const DishesDisplay = (props) => {
     <div className="DishesDisplay">
       <section class="dishes">
         {data.map((item) => (
-          <Dishes key={item.id} details={item} />
+          <Dishes className="box" key={item.id} details={item} />
         ))}
       </section>
     </div>

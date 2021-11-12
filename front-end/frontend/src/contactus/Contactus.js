@@ -1,14 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Contactus.module.css';
+const { default: axios } = require('axios')
 
-const Contactus = () => (
+function Contactus(){
+  function contactTeam(e){
+    e.preventDefault()
+    axios.post("/contactus").then(response => {console.log(response)})
+  }
+  return(
   <div className={styles.Contactus}>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
-    <form>
+    <form onSubmit={contactTeam}>
       <div className={styles.spacing}></div>
       <h2>Contact the team.</h2>
       <div className={styles.spacing}></div>
@@ -49,6 +55,7 @@ const Contactus = () => (
     </form>
   </div>
 );
+  }
 
 Contactus.propTypes = {};
 

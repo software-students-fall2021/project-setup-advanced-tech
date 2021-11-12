@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Createaccount.module.css';
+const { default: axios } = require('axios')
 
-function doSomethingWithData(data){
-
+function createaccount(e, data){
+  e.preventDefault()
+  axios.post("/createaccount").then(response => {console.log(response)})
 }
 
 const Createaccount = () => (
   <div className={styles.Createaccount}>
     <div className={styles.spacing}></div>
-    <form onSubmit={doSomethingWithData}>
+    <form onSubmit={createaccount}>
     <div className={styles.spacing}></div>
       <h2>Create an account.</h2>
       <div className={styles.spacing}></div>

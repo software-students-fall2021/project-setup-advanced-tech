@@ -9,18 +9,27 @@
   width: 100%;
 }
 
-.welcomeMessage{
-  background-color: lightpink;
-}
-
-.welcomeHeader button{
-  width: 50%;
+.welcomeHeader .welcomeButton{
+  position: relative;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  top: 30%;
+  width: 20%;
+  height: 90px;
+  background-color: white;
+  font-size: 30px;
 }
 
 .welcomeHeader > *{
+  font-family: optima;
+}
+
+.welcomeHeader > .welcomeMessage{
   text-align: center;
   justify-content: center;
-  font-family: optima;
+  color: white;
 }
 
 .welcomeHeader > h1{
@@ -35,20 +44,16 @@
   height: 30px;
 }
 
-#first{
-  margin-top: 150px;
-}
-
-#second{
-  margin-top: 100px;
-}
-
 .spacing{
   height: 20px;
 }
 
+.welcomeHeader .welcomeButton:hover{
+  background-color: lightblue;
+  color: white;
+}
 @media only screen and (max-width: 768px) {
-  .welcomeHeader button{
+  .welcomeHeader .welcomeButton{
     font-size: 20px;
     width: 50%;
   }

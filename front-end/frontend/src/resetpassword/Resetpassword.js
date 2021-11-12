@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Resetpassword.module.css';
+const { default: axios } = require('axios')
 
-const Resetpassword = () => (
+function Resetpassword(){ 
+
+  function resetpassword(e){
+    e.preventDefault()
+    axios.post("/resetpassword").then(response => {console.log(response)})
+  }
+  return(
   <div className={styles.Resetpassword}>
-    <div className={styles.spacing}></div>
-      <div className={styles.spacing}></div>
-      <div className={styles.spacing}></div>
-      <div className={styles.spacing}></div>
-      <div className={styles.spacing}></div>
-      <div className={styles.spacing}></div>
-    <form>
+    {window.location.href === "http://localhost:3000/resetpassword"? 
+    <form onSubmit={resetpassword}>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
       <h2>Reset password.</h2>
@@ -27,9 +29,9 @@ const Resetpassword = () => (
       <button>Send me a link.</button>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
-    </form>
+    </form>: null}
   </div>
-);
+);}
 
 Resetpassword.propTypes = {};
 

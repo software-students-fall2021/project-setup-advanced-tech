@@ -1,9 +1,13 @@
 .Contactus {}
 
 .Contactus form{
-    background-color: lightpink;
+    color: white;
     margin: auto;
     width: 75%;
+}
+
+.Contactus h2{
+    text-align: center;
 }
 
 .Contactus .firstnameLastname{
@@ -17,20 +21,40 @@
     width: 40%;
 }
 
+.Contactus .firstnameLastname .name h3{
+    text-align: center;
+}
+
 .Contactus .firstnameLastname .name input{
     text-align: center;
     width: 100%;
     height: 30px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .Contactus .email{
     margin-top: 50px;
 }
 
+.Contactus .email > *{
+    text-align: center;
+}
+
+.Contactus .message > *{
+    text-align: center;
+}
+
 .Contactus .email input{
     text-align: center;
-    width: 25%;
+    width: 30%;
     height: 30px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .Contactus .message{
@@ -40,7 +64,11 @@
 .Contactus .message input{
     text-align: center;
     height: 100px;
-    width: 25%;
+    width: 50%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .Contactus .spacing{
@@ -48,6 +76,10 @@
 }
 
 .Contactus button{
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     width: 25%;
     height: 40px;
