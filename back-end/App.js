@@ -7,6 +7,10 @@ require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
+//stuff with mongoose and dontev
+const mongoose = require('mongoose');
+require('dotenv').config()
+const db = require('db')
 
 app.use(cors())
 
