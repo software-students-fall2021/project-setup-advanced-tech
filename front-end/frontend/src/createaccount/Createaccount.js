@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Createaccount.module.css';
+import {useHistory} from 'react-router-dom';
 const { default: axios } = require('axios')
 
-function createaccount(e, data){
-  e.preventDefault()
-  axios.post("/createaccount").then(response => {console.log(response)})
-}
+function Createaccount(props){
+  const history = useHistory()
+  function createaccount(e, data){
+    e.preventDefault()
+    axios.post("http://localhost:3001/createaccount", {}).then(response => {console.log(response)})
+      console.log(history)
+      props.created()
+      history.push("/")
+      
+  }
 
-const Createaccount = () => (
+  return(
   <div className={styles.Createaccount}>
     <div className={styles.spacing}></div>
     <form onSubmit={createaccount}>
@@ -59,7 +66,7 @@ const Createaccount = () => (
       <div className={styles.spacing}></div>
     </form>
   </div>
-);
+);}
 
 Createaccount.propTypes = {};
 

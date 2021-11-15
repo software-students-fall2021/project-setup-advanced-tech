@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Header.module.css';
 import axios from "axios";
@@ -8,26 +8,58 @@ import RestaurantProfile from '../restaurantprofile/Restaurant-profile';
 import Signin from '../signin/Signin';
 import {Route, Link} from 'react-router-dom';
 import { propTypes } from 'react-bootstrap/esm/Image';
+import RestaurantList from '../restaurantPreview/RestaurantList';
 
 function Search(props){
 
   const [diet, setDiet] = useState("");
   const[restaurants, setRestaurantsList] = useState([]);
   const[searched, toggleSearch] = useState(false);
-  const[profileClicked, toggleProfile] = useState(false)
-  let profiles = []
+  const[profiles, setProfiles] = useState([]);
+  const[data, setData] = useState([]);
+
+  useEffect(() => {
+    const restaurants_updated = []
+    let key = 0;
+    for (let i = 0; i < data.length; i++){
+      restaurants_updated.push(<button key={key} onClick={() => displayProfile(i, data)}><Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone}/></button>);
+      restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
+      restaurants_updated.push(profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
+      restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
+      restaurants_updated.push(profiles[i] ? <button key={key+4} onClick={() => profilePage(i, data)}>Learn more.</button>: null)
+      key+=5
+    }
+    setRestaurantsList(restaurants_updated);
+  }, [profiles])
+
+  function displayProfile(profile, data){
+    let newProfs = []
+    for (let i = 0; i < profiles.length; i++){
+      if (profile != i){
+        newProfs.push(profiles[i])
+      }
+      else{
+        newProfs.push(!profiles[i])
+      }
+    }
+    setProfiles(newProfs)
+  }
+
+  function profilePage(i, data){
+    props.profilePage(i, data);
+  }
 
   function setRestaurant(data){
-    setRestaurantsList([]);
-    profiles = []
+    setData(data);
     const restaurants_updated = []
     let key = 0;
     for (let i = 0; i < data.length; i++){
       profiles.push(false)
-      restaurants_updated.push(!profiles[i] ? <Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key}/>: null);
+      restaurants_updated.push(<button key={key} onClick={() => displayProfile(i, data)}><Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone}/></button>);
       restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
       restaurants_updated.push(profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
       restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
+      restaurants_updated.push(profiles[i] ? <button key={key+4} onClick={() => profilePage(i, data)}>Learn more.</button>: null)
       key+=5
     }
     setRestaurantsList(restaurants_updated);
