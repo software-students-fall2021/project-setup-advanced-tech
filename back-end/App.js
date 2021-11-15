@@ -7,6 +7,52 @@ require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
+//stuff with mongoose and dontev
+const mongoose = require('mongoose');   
+require('dotenv').config()
+const db = require('db')
+
+main().catch(err => console.log(err))
+async function main() {
+    await mongoose.connect('mongodb://localhost:3000/test');
+    //for test purposes; defining users and restaurants; representations of resstaurants, users, and dishes
+    const restaurantSchema = new mongoose.Schema({
+        id: float,
+        name: String,
+        city: String,
+        state: String,
+        address: String,
+        telephone: String,
+        rating: String,
+        type: String,
+        zip: String,
+    })
+
+    const Restaurant = mongoose.model('Restaurant', restaurantSchema)
+
+    const userSchema = new mongoose.Schema({
+        first_name: String,
+        last_name: String, 
+        email: String, 
+        first_pass: String, //THESE MUST BE STORED IN .ENV; JUST DOING THIS FOR TEST PURPOSES
+        second_pass: String, 
+        allergies: String, //CHECK THIS; MAY BE A LIST!
+    })
+    const User = mongoose.model('User', userSchema)
+
+    const dishSchema = new mongoose.Schema({
+        name: String, 
+        restaurant: Restaurant, 
+        description: String,
+        ingredients: String, //check this! May be a LIST
+    })
+    const Dish = mongoose.model('Dish', dishSchema)
+
+    //special user; there all the time
+    const foo_bar = new User({first_name: "Foo", last_name: "Bar", email: "foo.bar@yahoo.com", first_pass:"abcd", second_pass:"abcd", allergies: "nuts"})
+    await foo_bar.save()
+    //defining restaurants, dishes, and users; must be modified
+}
 
 app.use(cors())
 
