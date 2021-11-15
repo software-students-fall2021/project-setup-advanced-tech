@@ -46,6 +46,7 @@ function Search(props){
   }
 
   function profilePage(i, data){
+    console.log(data)
     props.profilePage(i, data);
   }
 
@@ -60,7 +61,7 @@ function Search(props){
       restaurants_updated.push(profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
       restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
       restaurants_updated.push(profiles[i] ? <button key={key+4} onClick={() => profilePage(i, data)}>Learn more.</button>: null)
-      key+=5
+      key+=6
     }
     setRestaurantsList(restaurants_updated);
     toggleSearch(true);

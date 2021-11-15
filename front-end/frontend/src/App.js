@@ -14,6 +14,8 @@ import Contactus from './contactus/Contactus';
 //import Search from './Search'
 import RestaurantList from './restaurantPreview/RestaurantList';
 import Restaurant from './restaurantprofile/Restaurant';
+import RestaurantProfilePage from './restaurantProfilePage/RestaurantProfilePage';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -61,7 +63,9 @@ function App() {
   }, [userdata]);
 
   function displayProfilePage(i, data){
-    setProfilePage(<div style={{color: 'white'}}>Profile page</div>)
+    setProfilePage(<RestaurantProfilePage 
+      name={data[i].name} address={data[i].address} 
+      telephone={data[i].telephone}/>)
   }
 
   function login(data){
@@ -103,9 +107,9 @@ function App() {
           </button>
         </div>
       : null}
-      {signedin || !signin && !profilePage && (window.location.href === "http://localhost:3000/") ?
+      {(signedin || !signin) && !profilePage && (window.location.href === "http://localhost:3000/") ?
       <div className="explore" ref={elementRef}>
-        {userdata != null ? <Search name={userdata.email}/>: <Search profilePage={displayProfilePage}/>}
+        {userdata != null ? <Search name={userdata.email} profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
         {!signedin ? <div className="signin">
           <h2>Want to search according to your own preferences?</h2>
           <Link style={{textDecoration: 'none'}} to="/signin">
