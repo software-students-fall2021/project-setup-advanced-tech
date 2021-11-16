@@ -18,12 +18,11 @@ function Signin(props){
     window.location.reload();
 };
   const history = useHistory()
-
-const login = e => {
-  e.preventDefault();
-  axios.post("/login").then(response => {console.log(response)})
-  props.login(data)
-  history.push("/")
+  const login = e => {
+    e.preventDefault();
+    axios.post("http://localhost:3001/login", {}).then(response => {console.log(response)})
+    props.login(data)
+    history.push("/")
 }
 
   return(
