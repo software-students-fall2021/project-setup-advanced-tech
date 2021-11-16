@@ -1,0 +1,83 @@
+.Signin{
+    width: 75%;
+    margin: auto;
+}
+
+.Signin h2{
+    text-align: center;
+}
+.Signin .input{
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    width: 60%;
+}
+.Signin .input > input{
+    padding: 10px;
+    width: 60%;
+    text-align: center;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.Signin form{
+    color: white;
+}
+
+.Signin form > button{
+    width: 20%;
+    height: 40px;
+    background-color: white;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.Signin button:hover{
+    background-color: darkcyan;
+    color: white;
+}
+
+.spacing{
+    height: 20px;
+}
+
+.Signin .options{
+    margin: auto;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+.Signin .options > button{
+    width: 50%;
+    height: 40px;
+    background-color: white;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    margin: auto auto 10px;
+}
+
+.Signin .options > button:hover{
+    background-color: darkcyan;
+    color: white;
+}
+@media only screen and (max-width: 768px) {
+    .Signin .input{
+        display: flex;
+        flex-direction: column;
+    }
+    .Signin .input > *{
+        margin: auto;
+    }
+
+    .Signin .input > input{
+        padding: 10px;
+        width: 70%;
+        text-align: center;
+    }
+  }

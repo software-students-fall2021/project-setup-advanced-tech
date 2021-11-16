@@ -1,0 +1,11 @@
+.Restaurant {
+    margin: auto;
+    width: 75%;
+}
+
+.Restaurant:hover {
+    cursor: pointer;
+}
+
+
+
