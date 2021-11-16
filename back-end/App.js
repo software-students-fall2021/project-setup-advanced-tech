@@ -12,18 +12,38 @@ const mongoose = require('mongoose');
 require('dotenv').config()
 const db = require('db')
 
+
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
+
 main().catch(err => console.log(err))
 async function main() {
-    await mongoose.connect('mongodb://localhost:3000/test');
+    await mongoose.connect('mongodb://localhost:3000/test')
     //for test purposes; defining users and restaurants; representations of resstaurants, users, and dishes
     const restaurantSchema = new mongoose.Schema({
-        id: float,
+        id: Number,
         name: String,
         city: String,
         state: String,
         address: String,
         telephone: String,
-        rating: String,
+        rating: Number,
         type: String,
         zip: String,
     })
@@ -57,12 +77,20 @@ async function main() {
 app.use(cors())
 
 //when the user signs in 
-app.post("/login", (req, res, next) => {
+app.post("/login", passport.authenticate('local', {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),(req, res, next) => {
+   if (successRedirect){
     res.status(200).json(
         {"message": "Success",
         "data": req.body
     })
     console.log("Successfully logged in user!")
+   } 
+   else{
+       //go to the login and respond with error message
+       res.send("Sorry. Couldn't log in. Please try again.")
+       console.log("Couldn't log in. ")
+   }
+   
 })
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
