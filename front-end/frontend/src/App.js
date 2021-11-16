@@ -4,7 +4,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import LandingPage from './welcomeHeader/WelcomeHeader';
 import LoadingPage from './loadingPage/LoadingPage';
-import {Route, Link} from 'react-router-dom';
+import {Route, Link, BrowserRouter} from 'react-router-dom';
 import Search from './header/Header';
 import React, { useRef } from 'react'
 import Signin from './signin/Signin';
@@ -16,6 +16,7 @@ import RestaurantList from './restaurantPreview/RestaurantList';
 import Restaurant from './restaurantprofile/Restaurant';
 import RestaurantProfilePage from './restaurantProfilePage/RestaurantProfilePage';
 import { propTypes } from 'react-bootstrap/esm/Image';
+import { Switch, useHistory } from 'react-router';
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
@@ -36,6 +37,8 @@ console.log(data)
     //  </div>
 function App() {
 
+  const history = useHistory();
+
   const [signin, renderSignin] = useState(false);
   const elementRef = useRef();
   const [resetpassword, toggleResetPassword] = useState(false)
@@ -52,10 +55,6 @@ function App() {
   useEffect(() => {
     const divElement = elementRef.current;
   }, []);
-
-  useEffect(() => {
-    console.log(profilePage)
-  }, [profilePage])
 
   useEffect(() => {
     if (userdata != null)
@@ -99,37 +98,49 @@ function App() {
 
   return (
     <div className="App">
-      {!signin && !profilePage && (window.location.href === "http://localhost:3000/") ?  
-        <div className="landingPage">
-          <LandingPage/>
-          <button onClick={scrollTo}>
-            Explore Restaurants.
-          </button>
-        </div>
-      : null}
-      {(signedin || !signin) && !profilePage && (window.location.href === "http://localhost:3000/") ?
-      <div className="explore" ref={elementRef}>
-        {userdata != null ? <Search name={userdata.email} profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
-        {!signedin ? <div className="signin">
-          <h2>Want to search according to your own preferences?</h2>
-          <Link style={{textDecoration: 'none'}} to="/signin">
-            <button onClick={test}>
-              Sign in.
-            </button>
-          </Link>;
-        </div>: null}
-      </div>: null}
-      {(signin && !signedin && !profilePage)? <Signin login={login}/>: null}
-      {window.location.href === "http://localhost:3000/signin" ? 
-          <div className="options">
-            <Link to="/resetpassword" style={{textDecoration: 'none'}}><button onClick={toggleResetPassword}>Forgot your password?</button></Link>
-            <Link to="/createaccount" style={{textDecoration: 'none'}}><button onClick={toggleCreateAccount}>Don't have an account? Create one.</button></Link>
-            <Link to="/contactus" style={{textDecoration: 'none'}}><button onClick={toggleContactus}>Contact us.</button></Link>
-          </div>: null}
-      {resetpassword && !reset ? <Resetpassword reset={renderResetPassword}/>: null}
-      {createaccount && !created ?<Createaccount created={renderCreateAccount}/>: null}
-      {contactus && !contacted ? <Contactus contacted={renderContactUs}/>: null}
-      {profilePage != null ? profilePage: null}
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+              <div className="landingPage">
+                <LandingPage/>
+                <button onClick={scrollTo}>
+                  Explore Restaurants.
+                </button>
+              </div>
+              <div className="explore" ref={elementRef}>
+                {userdata != null ? <Search name={userdata.email} profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
+                {!signedin ? 
+                <div className="signin">
+                  <h2>Want to search according to your own preferences?</h2>
+                  <Link to="/signin"><button onClick={test}>
+                    Sign in.
+                  </button>
+                  </Link>
+                </div>: null}
+              </div>
+          </Route>
+          <Route exact path="/signin">
+            <Signin login={login}/>
+            <div className="options">
+              <Link to="/resetpassword" style={{textDecoration: 'none'}}><button onClick={toggleResetPassword}>Forgot your password?</button></Link>
+              <Link to="/createaccount" style={{textDecoration: 'none'}}><button onClick={toggleCreateAccount}>Don't have an account? Create one.</button></Link>
+              <Link to="/contactus" style={{textDecoration: 'none'}}><button onClick={toggleContactus}>Contact us.</button></Link>
+            </div>
+          </Route>
+          <Route exact path="/resetpassword">
+            <Resetpassword reset={renderResetPassword}/>
+          </Route>
+          <Route exact path="/createaccount">
+            <Createaccount created={renderCreateAccount}/>
+          </Route>
+          <Route exact path="/contactus">
+            <Contactus contacted={renderContactUs}/>
+          </Route>
+          <Route exact path="/profile">
+            {profilePage}
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   )
 }
