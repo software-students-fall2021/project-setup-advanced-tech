@@ -84,7 +84,8 @@ async function main() {
 app.use(cors())
 
 //when the user signs in 
-app.post("/login", passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),(req, res, next) => {
+app.post("/login", (req, res, next) => {
+    /*
    if (successRedirect){
     res.status(200).json(
         {"message": "Success",
@@ -96,8 +97,37 @@ app.post("/login", passport.authenticate("jwt", {successRedirect: '/restaurants'
        //go to the login and respond with error message
        res.send("Sorry. Couldn't log in. Please try again.")
        console.log("Couldn't log in. ")
-   }
-   
+   } */
+
+   const username = req.body.first_name + req.body.last_name
+   const password = req.body.first_pass
+
+   if (!username || !password) {
+    // no username or password submitted by the user
+    res
+      .status(401)
+      .json({ success: false, message: `no username or password supplied.` })
+  }
+
+  const user = User.findOne({first_name: req.body.first_name, last_name: req.body.last_name, first_pass: password}) //finds user in database with associated name and password
+
+  if (!user) {
+    // no user found with this name
+    res
+      .status(401)
+      .json({ success: false, message: `user not found: ${username}.` })
+  }
+  else if (req.body.password == user.password) {
+    // the password the user entered matches 
+    const payload = { id: user.id } // some data we'll encode into the token
+    const token = jwt.sign(payload, jwtOptions.secretOrKey) // create a signed token
+    res.json({ success: true, username: user.username, token: token }) // send the token to the client to store
+  } 
+  else {
+    // the password did not match
+    res.status(401).json({ success: false, message: "passwords did not match" })
+  }
+
 })
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
@@ -206,4 +236,7 @@ app.post("/restaurants", (req, res, next) => {
       res.status(200).send(data);
     
 })
+
+
+//passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),
 
