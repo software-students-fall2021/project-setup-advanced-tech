@@ -31,6 +31,13 @@ passport.use(new LocalStrategy(
   }
 ));
 
+const jwt = require("jsonwebtoken")
+const passport = require("passport")
+app.use(passport.initialize()) // tell express to use passport middleware
+
+const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
+passport.use(jwtStrategy)
+
 
 main().catch(err => console.log(err))
 async function main() {
@@ -77,7 +84,7 @@ async function main() {
 app.use(cors())
 
 //when the user signs in 
-app.post("/login", passport.authenticate('local', {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),(req, res, next) => {
+app.post("/login", passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),(req, res, next) => {
    if (successRedirect){
     res.status(200).json(
         {"message": "Success",
