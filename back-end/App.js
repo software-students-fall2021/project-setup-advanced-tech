@@ -61,6 +61,7 @@ app.post("/login", (req, res, next) => {
     User.find({first_name: req.body.first_name}, function (err, docs) {
         results = docs
       });
+    /*
     if (results[0].password === req.body.password){
         res.status(200).json(
             {"message": "Success",
@@ -70,6 +71,11 @@ app.post("/login", (req, res, next) => {
     else{
         res.status(200).json({"message": "Failure"})
     }
+    */
+    res.status(200).json(
+        {"message": "Success",
+        "data": req.body
+    })
     console.log("Successfully logged in user!")
 })
 //when the user creates an account
