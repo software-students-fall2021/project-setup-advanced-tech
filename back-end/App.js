@@ -32,6 +32,22 @@ const restaurantSchema = new mongoose.Schema({
     zip: String
 })
 const Restaurant = mongoose.model('Restaurant', restaurantSchema)
+
+const resetRequest = new mongoose.Schema({
+    id: Number,
+    email: String,
+    date: String
+})
+const ResetRequest = mongoose.model('ResetRequest', resetRequest)
+
+const contactRequest = new mongoose.Schema({
+    id: Number,
+    first_name: String,
+    last_name: String,
+    email: String,
+    message: String
+})
+const ContactRequest = mongoose.model('ContactRequest', contactRequest)
 require('dotenv').config()
 const db = require('db')
 
