@@ -21,6 +21,8 @@ function Search(props){
   const[locationClicked, toggleLocation] = useState(false);
   const[foodTypeClicked, toggleFoodType] = useState(false);
   const[ratingClicked, toggleRating] = useState(false);
+  const[allergiesClicked, toggleAllergies] = useState(false);
+  const [searchCriteria, setSearchCriteria] = useState({location: "", rating: "", allergies: "", food_type: ""})
 
   function location(){
     toggleLocation(!locationClicked);
@@ -32,6 +34,10 @@ function Search(props){
 
   function rating(){
     toggleRating(!ratingClicked)
+  }
+
+  function allergies(){
+    toggleAllergies(!allergiesClicked)
   }
 
   useEffect(() => {
@@ -72,12 +78,12 @@ function Search(props){
     let key = 0;
     for (let i = 0; i < data.length; i++){
       profiles.push(false)
-      restaurants_updated.push(<button key={key} onClick={() => displayProfile(i, data)}><Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone}/></button>);
+      restaurants_updated.push(<button key={key} onClick={() => displayProfile(i, data)}><Restaurant key={key+5}name={data[i].name} address={data[i].address} telephone={data[i].telephone}/></button>);
       restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
       restaurants_updated.push(profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
       restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
       restaurants_updated.push(profiles[i] ? <Link to="/profile"><button key={key+4} onClick={() => profilePage(i, data)}>Learn more.</button></Link>: null)
-      key+=6
+      key+=7
     }
     setRestaurantsList(restaurants_updated);
     toggleSearch(true);
@@ -87,8 +93,10 @@ function Search(props){
     event.preventDefault();
     toggleSearch(false)
     console.log(diet);
-    axios.get("http://localhost:3001/restaurants")
-    .then(response => {setRestaurant(response.data)});
+    axios.post("http://localhost:3001/restaurants", searchCriteria)
+    .then(response => {
+      console.log(response)
+      setRestaurant(response.data)});
   }
 
   return(
@@ -123,20 +131,29 @@ function Search(props){
       <button onClick={location}>Location</button>
       <button onClick={foodType}>Food-type</button>
       <button onClick={rating}>Rate</button>
+      <button onClick={allergies}>Allergies</button>
     </div>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     {locationClicked ? <div>
-      <h2>Please enter your zipcode</h2>
-      <input type="text" placeholder="zipcode"></input>
+      <h2>Please enter your location</h2>
+      <input type="text" placeholder="location" 
+      onChange={e => setSearchCriteria({...searchCriteria, location: e.target.value})} value={searchCriteria.location}></input>
     </div>: null}
     {foodTypeClicked ? <div>
       <h2>Please enter your food-type</h2>
-      <input type="text" placeholder="type"></input>
+      <input type="text" placeholder="type"
+      onChange={e => setSearchCriteria({...searchCriteria, food_type: e.target.value})} value={searchCriteria.food_type}></input>
     </div>: null}
     {ratingClicked ? <div>
       <h2>Please enter a rating</h2>
-      <input type="text" placeholder="rating"></input>
+      <input type="text" placeholder="rating"
+      onChange={e => setSearchCriteria({...searchCriteria, rating: e.target.value})} value={searchCriteria.rating}></input>
+    </div>: null}
+    {allergiesClicked ? <div>
+      <h2>Please enter a list of allergies</h2>
+      <input type="text" placeholder="allergies"
+      onChange={e => setSearchCriteria({...searchCriteria, allergies: e.target.value})} value={searchCriteria.allergies}></input>
     </div>: null}
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
