@@ -57,7 +57,7 @@ app.use(cors())
 app.post("/login", (req, res, next) => {
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
-    const results = []
+    let results = []
     User.find({first_name: req.body.first_name}, function (err, docs) {
         results = docs
       });
@@ -85,6 +85,7 @@ app.post("/createaccount", (req, res) => {
             "message": "Email cannot be null."
         })
     }
+    /*
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
     let toInsert = new User(
@@ -105,6 +106,7 @@ app.post("/createaccount", (req, res) => {
                 })
             }
         })
+        */
         console.log("Succesful registration");
 
 })
@@ -159,8 +161,24 @@ app.post("/restaurants", (req, res, next) => {
     const type = req.body.type
     const allergies = req.body.type
 
+    const data = [
+        {
+        "name": "test",
+        "telephone": "123-456-7891",
+        "address": "123 Main st",
+        "dishes": "another one"
+        },
+        {
+        "name": "carmine's",
+        "telephone": "123-456-7891",
+        "address": "123 Dam st",
+        "dishes": "pizza"
+        }
+        ]
+    res.status(200).json(data)
     console.log("Successfully hitting post for /RESTAURANTS")
 
+    /*
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/restaurants?retryWrites=true&w=majority');
     const results = []
@@ -168,6 +186,7 @@ app.post("/restaurants", (req, res, next) => {
     Restaurant.find({type: req.body.food_type, city: req.body.location, rating: parseInt(req.body.rating)}, function(err, docs){
         res.status(200).send(docs);
     });
+    */
     
 })
 
