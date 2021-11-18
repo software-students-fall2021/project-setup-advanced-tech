@@ -33,6 +33,15 @@ const restaurantSchema = new mongoose.Schema({
 })
 const Restaurant = mongoose.model('Restaurant', restaurantSchema)
 
+const dishSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    restaurant: Number,
+    description: String,
+    ingredients: String
+})
+const Dish = mongoose.model('Dish', dishSchema)
+
 const resetRequest = new mongoose.Schema({
     id: Number,
     email: String,
