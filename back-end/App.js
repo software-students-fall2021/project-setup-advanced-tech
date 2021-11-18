@@ -7,53 +7,75 @@ require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
+//stuff with mongoose and dontev
+const mongoose = require('mongoose');   
+
+const userSchema = new mongoose.Schema({
+    first_name: String,
+    last_name: String, 
+    email: String, 
+    first_pass: String, //THESE MUST BE STORED IN .ENV; JUST DOING THIS FOR TEST PURPOSES
+    second_pass: String, 
+    allergies: String, //CHECK THIS; MAY BE A LIST!
+})
+const User = mongoose.model('User', userSchema)
+require('dotenv').config()
+const db = require('db')
 
 app.use(cors())
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
-    res.status(200).json(
-        {"message": "Success",
-        "data": req.body
-    })
+    const password = process.env.PASSWORD;
+    mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
+    const results = []
+    User.find({first_name: req.body.first_name}, function (err, docs) {
+        results = docs
+      });
+    if (results[0].password === req.body.password){
+        res.status(200).json(
+            {"message": "Success",
+            "data": req.body
+        })
+    }
+    else{
+        res.status(200).json({"message": "Failure"})
+    }
     console.log("Successfully logged in user!")
 })
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
 
     if (!(req.body.first_pass === req.body.second_pass)){
-        res.status(400).json({
-            "message": "Failure",
-            "data": JSON.stringify(req.body)
+        res.status(200).json({
+            "message": "Password do not match.",
         })
-        console.log("Passwords do not match");
     }
     else if (req.body.email === null || req.body.email === ''){
-        res.status(400).json({
-            "message": "Failure",
-            "data": JSON.stringify(req.body)
+        res.status(200).json({
+            "message": "Email cannot be null."
         })
-        console.log("Email cannot be null.");
-    } 
-        
-    
-    const name = req.body.first_name + req.body.last_name 
-    const email = req.body.email
-    const password = req.body.first_pass
-    const allergies = req.body.allergies
-
-    const obj = {
-        "firstname": req.body.first_name,
-        "lastname": req.body.last_name,
-        "email": req.body.email,
-        "allergies": req.body.allergies
     }
-    res.status(200).json(
-        {
-            "message": "Success",
-            "data": req.body
-        }
-        )
+    const password = process.env.PASSWORD;
+    mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
+    let toInsert = new User(
+        {first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: req.body.email,
+        first_pass: req.body.first_pass,
+        allergies: req.body.allergies})
+        toInsert.save(function (err, book) {
+            if (err){
+                res.status(200).json({
+                    "status": "Failure"
+                })
+            }
+            else{
+                res.status(200).json({
+                    "status": "Success"
+                })
+            }
+        })
         console.log("Succesful registration");
 
 })
