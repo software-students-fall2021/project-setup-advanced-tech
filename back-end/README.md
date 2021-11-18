@@ -1,6 +1,10 @@
 ## Available Scripts
 
-In the project directory, you can run to initialize the server on port 3001:
+In order to initialize the server, please run the following command:
+
+### `npm install --save axios`
+
+In the this directory, you can run to initialize the server on port 3001:
 
 ### `node server.js`
 
