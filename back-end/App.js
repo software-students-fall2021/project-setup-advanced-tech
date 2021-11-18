@@ -32,6 +32,22 @@ const restaurantSchema = new mongoose.Schema({
     zip: String
 })
 const Restaurant = mongoose.model('Restaurant', restaurantSchema)
+
+const resetRequest = new mongoose.Schema({
+    id: Number,
+    email: String,
+    date: String
+})
+const ResetRequest = mongoose.model('ResetRequest', resetRequest)
+
+const contactRequest = new mongoose.Schema({
+    id: Number,
+    first_name: String,
+    last_name: String,
+    email: String,
+    message: String
+})
+const ContactRequest = mongoose.model('ContactRequest', contactRequest)
 require('dotenv').config()
 const db = require('db')
 
@@ -114,10 +130,11 @@ app.post("/login", (req, res, next) => {
 
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
-    const results = []
+    let results = []
     User.find({first_name: req.body.first_name}, function (err, docs) {
         results = docs
       });
+    /*
     if (results[0].password === req.body.password){
         res.status(200).json(
             {"message": "Success",
@@ -127,7 +144,11 @@ app.post("/login", (req, res, next) => {
     else{
         res.status(200).json({"message": "Failure"})
     }
-
+    */
+    res.status(200).json(
+        {"message": "Success",
+        "data": req.body
+    })
     console.log("Successfully logged in user!")
    } 
    else{
@@ -179,6 +200,7 @@ app.post("/createaccount", (req, res) => {
             "message": "Email cannot be null."
         })
     }
+    /*
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
     let toInsert = new User(
@@ -199,6 +221,7 @@ app.post("/createaccount", (req, res) => {
                 })
             }
         })
+        */
         console.log("Succesful registration");
 
 })
@@ -253,8 +276,24 @@ app.post("/restaurants", (req, res, next) => {
     const type = req.body.type
     const allergies = req.body.type
 
+    const data = [
+        {
+        "name": "test",
+        "telephone": "123-456-7891",
+        "address": "123 Main st",
+        "dishes": "another one"
+        },
+        {
+        "name": "carmine's",
+        "telephone": "123-456-7891",
+        "address": "123 Dam st",
+        "dishes": "pizza"
+        }
+        ]
+    res.status(200).json(data)
     console.log("Successfully hitting post for /RESTAURANTS")
 
+    /*
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/restaurants?retryWrites=true&w=majority');
     const results = []
@@ -262,6 +301,7 @@ app.post("/restaurants", (req, res, next) => {
     Restaurant.find({type: req.body.food_type, city: req.body.location, rating: parseInt(req.body.rating)}, function(err, docs){
         res.status(200).send(docs);
     });
+    */
     
 })
 
