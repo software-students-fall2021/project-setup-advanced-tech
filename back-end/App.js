@@ -19,6 +19,19 @@ const userSchema = new mongoose.Schema({
     allergies: String, //CHECK THIS; MAY BE A LIST!
 })
 const User = mongoose.model('User', userSchema)
+
+const restaurantSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    city: String,
+    state: String,
+    address: String,
+    telephone: String,
+    rating: Number,
+    type: String,
+    zip: String
+})
+const Restaurant = mongoose.model('Restaurant', restaurantSchema)
 require('dotenv').config()
 const db = require('db')
 
@@ -240,21 +253,15 @@ app.post("/restaurants", (req, res, next) => {
     const type = req.body.type
     const allergies = req.body.type
 
-    const data = [
-        {
-        "name": "test",
-        "telephone": "123-456-7891",
-        "address": "123 Main st"
-        },
-        {
-        "name": "carmine's",
-        "telephone": "123-456-7891",
-        "address": "123 Dam st"
-        }
-        ]
-      console.log("Backup data initialized.");
+    console.log("Successfully hitting post for /RESTAURANTS")
 
-      res.status(200).send(data);
+    const password = process.env.PASSWORD;
+    mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/restaurants?retryWrites=true&w=majority');
+    const results = []
+    console.log(req.body.food_type)
+    Restaurant.find({type: req.body.food_type, city: req.body.location, rating: parseInt(req.body.rating)}, function(err, docs){
+        res.status(200).send(docs);
+    });
     
 })
 
