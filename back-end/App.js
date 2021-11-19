@@ -83,9 +83,10 @@ app.use(cors())
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
-    res.status(200).json(
-        {"message": "Success",
-        "data": req.body
+    const password = process.env.password;
+    mongoose.connect("mongodb+srv://admin-weet:" + password + "@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority")
+    User.find({email: req.body.email, password: req.body.password}, function(err, docs){
+        res.status(200).send(docs)
     })
     console.log("Successfully logged in user!")
 
