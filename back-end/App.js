@@ -6,6 +6,8 @@ module.exports = app
 require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+require('dotenv').config()
+const db = require('db')
 
 //stuff with mongoose and dontev
 const mongoose = require('mongoose');   
@@ -14,11 +16,11 @@ const userSchema = new mongoose.Schema({
     first_name: String,
     last_name: String, 
     email: String, 
-    first_pass: String, //THESE MUST BE STORED IN .ENV; JUST DOING THIS FOR TEST PURPOSES
+    first_pass: String,
     second_pass: String, 
-    allergies: String, //CHECK THIS; MAY BE A LIST!
+    allergies: String,
 })
-const User = mongoose.model('User', userSchema)
+const User = mongoose.model('User', userSchema, "users")
 
 const restaurantSchema = new mongoose.Schema({
     id: Number,
@@ -57,13 +59,9 @@ const contactRequest = new mongoose.Schema({
     message: String
 })
 const ContactRequest = mongoose.model('ContactRequest', contactRequest)
-require('dotenv').config()
-const db = require('db')
 
-
-/*
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport'),
+LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -79,7 +77,7 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-*/
+
 /*
 const jwt = require("jsonwebtoken")
 app.use(passport.initialize()) // tell express to use passport middleware
@@ -92,49 +90,53 @@ app.use(cors())
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
-    res.status(200).json(
-        {"message": "Success",
-        "data": req.body
-    })
+    const password = process.env.PASSWORD;
+    mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
+    User.find({first_name: req.body.first_name}, function (err, docs) {
+        if (docs[0].password === req.body.password){
+            res.status(200).json({"message": "Success"})
+        }
+        else{
+            res.status(200).json({"message": "Failure"})
+        }
+      });
     console.log("Successfully logged in user!")
 
 })
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
-
-    if (!(req.body.first_pass === req.body.second_pass)){
-        res.status(200).json({
-            "message": "Password do not match.",
-        })
-    }
-    else if (req.body.email === null || req.body.email === ''){
-        res.status(200).json({
-            "message": "Email cannot be null."
-        })
-    }
-    /*
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
-    let toInsert = new User(
-        {first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        first_pass: req.body.first_pass,
-        allergies: req.body.allergies})
-        toInsert.save(function (err, book) {
-            if (err){
-                res.status(200).json({
-                    "status": "Failure"
+    User.find({email: req.body.email}, function(err, docs){
+        if (docs.length > 0){
+            res.status(200).json({
+                "message": "Email has already been taken."
+            }) 
+        }
+        else{
+            let toInsert = new User({
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                email: req.body.email,
+                first_pass: req.body.first_pass,
+                second_pass: req.body.second_pass,
+                allergies: req.body.allergies
+            })
+                toInsert.save(function (err, docs) {
+                    if (err){
+                        res.status(200).json({
+                            "message": "Failure"
+                        })
+                    }
+                    else{
+                        res.status(200).json({
+                            "message": "Success"
+                        })
+                    }
                 })
-            }
-            else{
-                res.status(200).json({
-                    "status": "Success"
-                })
-            }
-        })
-        */
-        console.log("Succesful registration");
+                console.log("Succesful registration");
+        }
+    })
 
 })
 //User wants to  reset password
@@ -162,58 +164,13 @@ app.post("/contactus", (req, res) => {
 
 
 //if the user just searches for restaurants without parameters
-app.get("/restaurants", (req, res, next) => {
-    const data = [
-        {
-        "name": "test",
-        "telephone": "123-456-7891",
-        "address": "123 Main st"
-        },
-        {
-        "name": "carmine's",
-        "telephone": "123-456-7891",
-        "address": "123 Dam st"
-        }
-        ]
-      console.log("Backup data initialized.");
-      res.status(200).send(data)
-    
-})
-
-//if the user searches for restaurants with location, rating, type, and allergies; Route probably has to be changed
 app.post("/restaurants", (req, res, next) => {
-
-    const location = req.body.location
-    const rating = req.body.rating
-    const type = req.body.type
-    const allergies = req.body.type
-
-    const data = [
-        {
-        "name": "test",
-        "telephone": "123-456-7891",
-        "address": "123 Main st",
-        "dishes": "another one"
-        },
-        {
-        "name": "carmine's",
-        "telephone": "123-456-7891",
-        "address": "123 Dam st",
-        "dishes": "pizza"
-        }
-        ]
-    res.status(200).json(data)
-    console.log("Successfully hitting post for /RESTAURANTS")
-
-    /*
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/restaurants?retryWrites=true&w=majority');
-    const results = []
-    console.log(req.body.food_type)
-    Restaurant.find({type: req.body.food_type, city: req.body.location, rating: parseInt(req.body.rating)}, function(err, docs){
+    Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
         res.status(200).send(docs);
     });
-    */
+    console.log("resturants /POST hit.")
     
 })
 
