@@ -92,9 +92,16 @@ app.use(cors())
 app.post("/login", (req, res, next) => {
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
-    User.find({first_name: req.body.first_name}, function (err, docs) {
-        if (docs[0].password === req.body.password){
-            res.status(200).json({"message": "Success"})
+    User.find({email: req.body.email}, function (err, docs) {
+        if (docs[0].first_pass === req.body.password){
+            let userData = {
+                first_name: docs[0].first_name,
+                last_name: docs[0].last_name,
+                email: docs[0].email,
+                allergies: docs[0].allergies
+            }
+            res.status(200).json({"message": "Success",
+                                userData: userData})
         }
         else{
             res.status(200).json({"message": "Failure"})

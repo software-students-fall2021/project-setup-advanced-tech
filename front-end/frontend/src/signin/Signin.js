@@ -20,9 +20,12 @@ function Signin(props){
   const history = useHistory()
   const login = e => {
     e.preventDefault();
-    axios.post("http://localhost:3001/login", {}).then(response => {console.log(response)})
-    props.login(data)
-    history.push("/")
+    axios.post("http://localhost:3001/login", data).then(
+      response => {
+        props.login(response.data.userData)
+        history.push("/")
+      }
+    )
 }
 
   return(

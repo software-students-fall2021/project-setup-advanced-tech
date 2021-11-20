@@ -17,24 +17,9 @@ import Restaurant from './restaurantprofile/Restaurant';
 import RestaurantProfilePage from './restaurantProfilePage/RestaurantProfilePage';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import { Switch, useHistory } from 'react-router';
+import UserProfilePage from './userProfilePage/UserProfilePage';
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-
-const backupData =
-  {
-    "first_name": "Jeremy",
-    "last_name":"Renner",
-    "allergies":["sodium hydroxide", "cyanide"],
-    "email": "jrenner@hotmail.edu",
-    "password": "hawkeye"
-  }
-const data=backupData[0]
-console.log(data) 
-
-      //<WelcomeHeader/>
-      //<Search></Search>
-      //<div className="App">
-    //  </div>
 function App() {
 
   const history = useHistory();
@@ -46,22 +31,29 @@ function App() {
   const [createaccount, toggleCreateAccount] = useState(false);
   const[signedin, setSignin] = useState(false);
 
-  const [userdata, setUserdata] = useState(null)
+  const [userdata, setUserdata] = useState({first_name: "", last_name: "", email: "", allergies: ""})
   const [reset, resetPassword] = useState(false)
   const [created, createAccount] = useState(false)
   const [contacted, contactUs] = useState(false)
   const [profilePage, setProfilePage] = useState(null);
+  const[userprofilepage, setuserprofilepage] = useState(null);
 
   useEffect(() => {
     const divElement = elementRef.current;
   }, []);
 
   useEffect(() => {
-    if (userdata != null)
+    if (userdata.first_name !== "")
       setSignin(true)
   }, [userdata]);
 
+  function displayUserProfilePage(){
+    setuserprofilepage(<UserProfilePage first_name={userdata.first_name}
+    last_name={userdata.last_name} email={userdata.email} allergies={userdata.allergies}/>)
+  }
+
   function displayProfilePage(i, data){
+    console.log(userdata)
     setProfilePage(<RestaurantProfilePage 
       name={data[i].name} address={data[i].address} 
       telephone={data[i].telephone}/>)
@@ -92,6 +84,11 @@ function App() {
     renderSignin(true);
   }
 
+  function logout(){
+    setSignin(false);
+    setUserdata({first_name: "", last_name: "", email: "", allergies: ""})
+  }
+
   window.onpopstate = function(event) {
     window.location.reload();
 };
@@ -103,16 +100,21 @@ function App() {
           <Route exact path="/">
               <div className="landingPage">
                 <LandingPage/>
-                <button onClick={scrollTo}>
+                {!signedin ? <button onClick={scrollTo}>
                   Explore Restaurants.
-                </button>
+                </button>: <div className="signedIn">
+                  <Link style={{textDecoration: 'none'}}to="/home"><button onClick={displayUserProfilePage}>
+                  My Stuff.
+                </button></Link>
+                <button onClick={logout}>Logout</button>
+                </div>}
               </div>
               <div className="explore" ref={elementRef}>
                 {userdata != null ? <Search name={userdata.email} profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
                 {!signedin ? 
                 <div className="signin">
                   <h2>Want to search according to your own preferences?</h2>
-                  <Link to="/signin"><button onClick={test}>
+                  <Link to="/signin" style={{textDecoration: 'none'}}><button onClick={test}>
                     Sign in.
                   </button>
                   </Link>
@@ -138,6 +140,9 @@ function App() {
           </Route>
           <Route exact path="/profile">
             {profilePage}
+          </Route>
+          <Route exact path="/home">
+            {userprofilepage}
           </Route>
         </Switch>
       </BrowserRouter>
