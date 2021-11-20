@@ -54,6 +54,17 @@
   border-bottom-left-radius: 20px;
 }
 
+.landingPage .signedIn{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 30%;
+}
+
+.landingPage .signedIn button{
+  margin-top: 20px;
+}
+
 .signin{
   text-align: center;
 }
