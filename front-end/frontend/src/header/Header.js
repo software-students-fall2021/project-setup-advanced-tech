@@ -104,7 +104,7 @@ function Search(props){
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <h2>Find the place that suits what you want.</h2>
-    {props.name != null ? <h3>Welcome, {props.name}</h3>: null}
+    {props.name != "" ? <h3>Welcome, {props.name}</h3>: null}
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.logoaccount}>
@@ -131,7 +131,6 @@ function Search(props){
       <button onClick={location}>Location</button>
       <button onClick={foodType}>Food-type</button>
       <button onClick={rating}>Rate</button>
-      <button onClick={allergies}>Allergies</button>
     </div>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
