@@ -9,6 +9,8 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 require('dotenv').config()
 const db = require('db')
 const jwt = require("jsonwebtoken")
+const { body, validationResult } = require('express-validator');
+const bcrypt = require("bcrypt");
 
 //stuff with mongoose and dontev
 const mongoose = require('mongoose');  
@@ -64,31 +66,14 @@ const contactRequest = new mongoose.Schema({
 })
 const ContactRequest = mongoose.model('ContactRequest', contactRequest)
 
-/*
-const passport = require('passport'),
-LocalStrategy = require('passport-local').Strategy;
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-*/
 app.use(cors())
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
-    User.find({email: req.body.email, first_pass: req.body.password}, function (err, docs) {
-        if (docs[0].first_pass === req.body.password){
+    body(req.body.email).isEmail()
+    User.find({email: req.body.email}, function (err, docs) {
+        let valid = bcrypt.compare(docs[0].first_pass, req.body.password);
+        if (valid){
             let userData = {
                 first_name: docs[0].first_name,
                 last_name: docs[0].last_name,
@@ -124,8 +109,8 @@ app.post("/createaccount", (req, res) => {
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
                 email: req.body.email,
-                first_pass: req.body.first_pass,
-                second_pass: req.body.second_pass,
+                first_pass: bcrypt.hashSync(req.body.first_pass, 5),
+                second_pass: bcrypt.hashSync(req.body.second_pass, 5),
                 allergies: req.body.allergies
             })
                 toInsert.save(function (err, docs) {
