@@ -173,28 +173,16 @@ app.post("/contactus", (req, res) => {
 app.post("/restaurants", (req, res, next) => {
     const token = req.headers['x-access-token']
     jwt.verify(token, process.env.secret, (err, decoded)=> {
-        console.log(req.body)
         if (err){
             Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
+                console.log("no token")
                 res.status(200).send(docs)
             });
         }
         else{
             Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
-                let restaurants = []
-                for (let i = 0; i < docs.length; i++){
-                    let restaurant = docs[i]
-                    let contains = false
-                    for (let j = 0; j < req.body.allergies; j++){
-                        if (restaurant.allergies.includes(req.body.allergies[j])){
-                            contains = true;
-                            break;
-                        }
-                    }
-                    if (!contains){
-                        restaurants.push(restaurant);
-                    }
-                }
+                console.log("executing")
+                console.log(docs[0].state)
                 res.status(200).send(docs)
             });
         }

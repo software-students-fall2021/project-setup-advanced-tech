@@ -92,7 +92,13 @@ function Search(props){
   function searchFood(event){
     event.preventDefault();
     toggleSearch(false)
-    axios.post("http://localhost:3001/restaurants", searchCriteria, {headers: {"x-access-token": props.token}})
+    let search = {
+      location: searchCriteria.location,
+      rating: searchCriteria.rating,
+      food_type: searchCriteria.food_type,
+      allergies: props.allergies
+    }
+    axios.post("http://localhost:3001/restaurants", search, {headers: {"x-access-token": props.token}})
     .then(response => {
       console.log(response)
       setRestaurant(response.data)});
