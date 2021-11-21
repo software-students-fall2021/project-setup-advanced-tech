@@ -80,7 +80,7 @@ function Search(props){
       profiles.push(false)
       restaurants_updated.push(<button key={key} onClick={() => displayProfile(i, data)}><Restaurant key={key+5}name={data[i].name} address={data[i].address} telephone={data[i].telephone}/></button>);
       restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
-      restaurants_updated.push(profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
+      restaurants_updated.push(profiles[i] ? <RestaurantProfile dishNum={data.dishes.length}name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
       restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
       restaurants_updated.push(profiles[i] ? <Link to="/profile"><button key={key+4} onClick={() => profilePage(i, data)}>Learn more.</button></Link>: null)
       key+=7
@@ -92,8 +92,13 @@ function Search(props){
   function searchFood(event){
     event.preventDefault();
     toggleSearch(false)
-    console.log(diet);
-    axios.post("http://localhost:3001/restaurants", searchCriteria)
+    let search = {
+      location: searchCriteria.location,
+      rating: searchCriteria.rating,
+      food_type: searchCriteria.food_type,
+      allergies: props.allergies
+    }
+    axios.post("http://localhost:3001/restaurants", search, {headers: {"x-access-token": props.token}})
     .then(response => {
       console.log(response)
       setRestaurant(response.data)});
