@@ -20,27 +20,6 @@ describe('/GET restaurants', () => {
     });
 });
 
-describe('/POST createaccount', () => {
-    it('it should CREATE a new account', (done) => {
-        let data = {
-            first_name: "The Lord of the Rings",
-            last_name: "J.R.R. Tolkien",
-            email: "test@gmail.com",
-            first_pass: "test",
-            second_pass: "test",
-            allergies: "malt extract"
-        }
-      chai.request(app)
-          .post('/createaccount')
-          .send(data)
-          .end((error, res) => {
-            assert(200, res.status);
-            done()
-          }
-          )
-    });
-});
-
 describe('/POST login', () => {
     it('it should LOGIN into an existing account', (done) => {
         let data = {
