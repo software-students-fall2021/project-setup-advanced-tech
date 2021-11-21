@@ -38,8 +38,6 @@ const contactRequest = new mongoose.Schema({
     message: String
 })
 const ContactRequest = mongoose.model('ContactRequest', contactRequest)
-require('dotenv').config()
-const db = require('db')
 
 app.use(cors())
 
@@ -68,58 +66,14 @@ app.post("/contactus", (req, res) => {
 
 
 //if the user just searches for restaurants without parameters
-app.get("/restaurants", (req, res, next) => {
-    const data = [
-        {
-        "name": "test",
-        "telephone": "123-456-7891",
-        "address": "123 Main st"
-        },
-        {
-        "name": "carmine's",
-        "telephone": "123-456-7891",
-        "address": "123 Dam st"
-        }
-        ]
-      console.log("Backup data initialized.");
-      res.status(200).send(data)
-    
-})
-
-//if the user searches for restaurants with location, rating, type, and allergies; Route probably has to be changed
 app.post("/restaurants", (req, res, next) => {
 
-    // const location = req.body.location
-    // const rating = req.body.rating
-    // const type = req.body.type
-    // const allergies = req.body.type
-
-    // const data = [
-    //     {
-    //     "name": "test",
-    //     "telephone": "123-456-7891",
-    //     "address": "123 Main st",
-    //     "dishes": "another one"
-    //     },
-    //     {
-    //     "name": "carmine's",
-    //     "telephone": "123-456-7891",
-    //     "address": "123 Dam st",
-    //     "dishes": "pizza"
-    //     }
-    //     ]
-    // res.status(200).json(data)
-    // console.log("Successfully hitting post for /RESTAURANTS")
-
-    /*
     const password = process.env.PASSWORD;
     mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/restaurants?retryWrites=true&w=majority');
-    const results = []
-    console.log(req.body.food_type)
-    Restaurant.find({type: req.body.food_type, city: req.body.location, rating: parseInt(req.body.rating)}, function(err, docs){
+    Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
         res.status(200).send(docs);
     });
-    */
+    console.log("resturants /POST hit.")
     
 })
 
