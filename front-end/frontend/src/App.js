@@ -38,6 +38,7 @@ function App() {
   const [contacted, contactUs] = useState(false)
   const [profilePage, setProfilePage] = useState(null);
   const[userprofilepage, setuserprofilepage] = useState(null);
+  const[search, setSearchPage] = useState(<Search profilePage={displayProfilePage}/>);
 
   useEffect(() => {
     const divElement = elementRef.current;
@@ -54,15 +55,15 @@ function App() {
   }
 
   function displayProfilePage(i, data){
-    console.log(userdata)
     setProfilePage(<RestaurantProfilePage 
       name={data[i].name} address={data[i].address} 
-      telephone={data[i].telephone}/>)
+      telephone={data[i].telephone} dishes={data[0].dishes}/>)
   }
 
   function login(data){
     setUserdata(data.data)
     setToken(data.token);
+    setSearchPage(<Search token={token} name={userdata.email} allergies={userdata.allergies}profilePage={displayProfilePage}/>)
   }
 
   function renderResetPassword(){
@@ -89,6 +90,8 @@ function App() {
   function logout(){
     setSignin(false);
     setUserdata({first_name: "", last_name: "", email: "", allergies: ""})
+    setToken("")
+    setSearchPage(<Search profilePage={displayProfilePage}/>)
   }
 
   window.onpopstate = function(event) {

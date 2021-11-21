@@ -175,15 +175,29 @@ app.post("/restaurants", (req, res, next) => {
     jwt.verify(token, process.env.secret, (err, decoded)=> {
         if (err){
             Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
-                console.log("no token")
+                console.log(req.body)
                 res.status(200).send(docs)
+                console.log(docs)
             });
         }
         else{
             Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
-                console.log("executing")
-                console.log(docs[0].state)
-                res.status(200).send(docs)
+                let restaurants = []
+                for (let i = 0; i < docs.length; i++){
+                    let restaurant = JSON.parse(JSON.stringify(docs[i]))
+                    let toAdd = JSON.parse(JSON.stringify(restaurant))
+                    toAdd.dishes = []
+                    for (let j = 0; j < restaurant.dishes.length; j++){
+                        let ingredString = JSON.stringify(restaurant.dishes[j].ingredients)
+                        if (!ingredString.includes(req.body.allergies)){
+                            toAdd.dishes.push(restaurant.dishes[j])
+                        }
+                    }
+                    if (toAdd.dishes.length > 0){
+                        restaurants.push(toAdd)
+                    }
+                }
+                res.status(200).json(restaurants)
             });
         }
     })
