@@ -3,9 +3,12 @@ const express = require('express')
 const app = express()
 let cors = require('cors')
 module.exports = app
+const bodyParser = require('body-parser')
 require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 require('dotenv').config()
 const db = require('db')
 const jwt = require("jsonwebtoken")
@@ -38,22 +41,6 @@ const restaurantSchema = new mongoose.Schema({
     zip: String
 })
 const Restaurant = mongoose.model('restaurants', restaurantSchema)
-
-const dishSchema = new mongoose.Schema({
-    id: Number,
-    name: String,
-    restaurant: Number,
-    description: String,
-    ingredients: String
-})
-const Dish = mongoose.model('Dish', dishSchema)
-
-const resetRequest = new mongoose.Schema({
-    id: Number,
-    email: String,
-    date: String
-})
-const ResetRequest = mongoose.model('ResetRequest', resetRequest)
 
 const contactRequest = new mongoose.Schema({
     id: Number,
