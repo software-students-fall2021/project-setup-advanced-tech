@@ -22,8 +22,10 @@ function Signin(props){
     e.preventDefault();
     axios.post("http://localhost:3001/login", data).then(
       response => {
-        props.login(response.data.userData)
-        history.push("/")
+        if (response.data !== null){
+          props.login(response.data)
+          history.push("/")
+        }
       }
     )
 }

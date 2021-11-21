@@ -8,19 +8,23 @@ app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 require('dotenv').config()
 const db = require('db')
+const jwt = require("jsonwebtoken")
 
 //stuff with mongoose and dontev
-const mongoose = require('mongoose');   
+const mongoose = require('mongoose');  
+const password = process.env.PASSWORD;
+mongoose.connect("mongodb+srv://admin-weet:" + password + "@weet.ze06y.mongodb.net/weet?retryWrites=true&w=majority"); 
 
 const userSchema = new mongoose.Schema({
     first_name: String,
-    last_name: String, 
-    email: String, 
+    last_name: String,
+    email: String,
     first_pass: String,
-    second_pass: String, 
-    allergies: String,
-})
-const User = mongoose.model('User', userSchema, "users")
+    second_pass: String,
+    allergies: String
+
+});
+const User = mongoose.model('user', userSchema)
 
 const restaurantSchema = new mongoose.Schema({
     id: Number,
@@ -33,7 +37,7 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     zip: String
 })
-const Restaurant = mongoose.model('Restaurant', restaurantSchema)
+const Restaurant = mongoose.model('restaurants', restaurantSchema)
 
 const dishSchema = new mongoose.Schema({
     id: Number,
@@ -60,6 +64,7 @@ const contactRequest = new mongoose.Schema({
 })
 const ContactRequest = mongoose.model('ContactRequest', contactRequest)
 
+/*
 const passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy;
 
@@ -77,22 +82,12 @@ passport.use(new LocalStrategy(
     });
   }
 ));
-
-/*
-const jwt = require("jsonwebtoken")
-app.use(passport.initialize()) // tell express to use passport middleware
-
-const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
-passport.use(jwtStrategy)
 */
-
 app.use(cors())
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
-    const password = process.env.PASSWORD;
-    mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
-    User.find({email: req.body.email}, function (err, docs) {
+    User.find({email: req.body.email, first_pass: req.body.password}, function (err, docs) {
         if (docs[0].first_pass === req.body.password){
             let userData = {
                 first_name: docs[0].first_name,
@@ -100,11 +95,17 @@ app.post("/login", (req, res, next) => {
                 email: docs[0].email,
                 allergies: docs[0].allergies
             }
-            res.status(200).json({"message": "Success",
-                                userData: userData})
+            const email = docs[0].email
+            const token = jwt.sign({email}, process.env.secret, {
+                expiresIn: 1000
+            })
+            res.status(200).json(
+                {auth: true, token: token,
+                data: userData}
+                )
         }
         else{
-            res.status(200).json({"message": "Failure"})
+            res.status(200).json({auth: false, token: null})
         }
       });
     console.log("Successfully logged in user!")
@@ -112,8 +113,6 @@ app.post("/login", (req, res, next) => {
 })
 //when the user creates an account
 app.post("/createaccount", (req, res) => {
-    const password = process.env.PASSWORD;
-    mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/users?retryWrites=true&w=majority');
     User.find({email: req.body.email}, function(err, docs){
         if (docs.length > 0){
             res.status(200).json({
@@ -172,12 +171,22 @@ app.post("/contactus", (req, res) => {
 
 //if the user just searches for restaurants without parameters
 app.post("/restaurants", (req, res, next) => {
-    const password = process.env.PASSWORD;
-    mongoose.connect('mongodb+srv://admin-weet:' + password + '@weet.ze06y.mongodb.net/restaurants?retryWrites=true&w=majority');
-    Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
-        res.status(200).send(docs);
-    });
-    console.log("resturants /POST hit.")
+    const token = req.headers['x-access-token']
+    jwt.verify(token, process.env.secret, (err, decoded)=> {
+        if (err){
+            Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
+                console.log("no token")
+                res.status(200).send(docs)
+            });
+        }
+        else{
+            Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
+                console.log("executing")
+                console.log(docs[0].state)
+                res.status(200).send(docs)
+            });
+        }
+    })
     
 })
 

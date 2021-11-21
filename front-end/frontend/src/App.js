@@ -32,6 +32,7 @@ function App() {
   const[signedin, setSignin] = useState(false);
 
   const [userdata, setUserdata] = useState({first_name: "", last_name: "", email: "", allergies: ""})
+  const [token, setToken] = useState("");
   const [reset, resetPassword] = useState(false)
   const [created, createAccount] = useState(false)
   const [contacted, contactUs] = useState(false)
@@ -60,7 +61,8 @@ function App() {
   }
 
   function login(data){
-    setUserdata(data)
+    setUserdata(data.data)
+    setToken(data.token);
   }
 
   function renderResetPassword(){
@@ -105,14 +107,14 @@ function App() {
                 {!signedin ? <button onClick={scrollTo}>
                   Explore Restaurants.
                 </button>: <div className="signedIn">
-                  <Link style={{textDecoration: 'none'}}to="/home"><button onClick={displayUserProfilePage}>
+                  <Link style={{textDecoration: 'none'}} to="/home"><button onClick={displayUserProfilePage}>
                   My Stuff.
                 </button></Link>
                 <button onClick={logout}>Logout</button>
                 </div>}
               </div>
               <div className="explore" ref={elementRef}>
-                {userdata != null ? <Search name={userdata.email} profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
+                {userdata != null ? <Search token={token} name={userdata.email} allergies={userdata.allergies}profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
                 {!signedin ? 
                 <div className="signin">
                   <h2>Want to search according to your own preferences?</h2>
