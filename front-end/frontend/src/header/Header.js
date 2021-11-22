@@ -10,6 +10,7 @@ import {Route, Link} from 'react-router-dom';
 import { propTypes } from 'react-bootstrap/esm/Image';
 import RestaurantList from '../restaurantPreview/RestaurantList';
 import RestaurantProfilePage from '../restaurantProfilePage/RestaurantProfilePage';
+import RestaurantPreview from '../restaurantPreview/RestaurantPreview';
 
 function Search(props){
 
@@ -44,11 +45,11 @@ function Search(props){
     const restaurants_updated = []
     let key = 0;
     for (let i = 0; i < data.length; i++){
-      restaurants_updated.push(<button key={key} onClick={() => displayProfile(i, data)}><Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone}/></button>);
+      restaurants_updated.push(<button className={styles.none}key={key} onClick={() => displayProfile(i, data)}><Restaurant name={data[i].name} address={data[i].address} telephone={data[i].telephone}/></button>);
       restaurants_updated.push(<div className={styles.spacing} key={key+3}></div>);
-      restaurants_updated.push(profiles[i] ? <RestaurantProfile name={data[i].name} address={data[i].address} telephone={data[i].telephone} key={key+2}/>: null)
+      restaurants_updated.push(profiles[i] ? <RestaurantPreview profilePage={profilePage(i, data)} i={i} data={data} name={data[i].name} address={data[i].address} city={data[i].city} state={data[i].state} telephone={data[i].telephone} key={key+2} dishnum={data[i].dishes.length}/>: null)
       restaurants_updated.push(<div className={styles.spacing} key={key+1}></div>);
-      restaurants_updated.push(profiles[i] ? <Link to="/profile"><button key={key+4} onClick={() => profilePage(i, data)}>Learn more.</button></Link>: null)
+      restaurants_updated.push(profiles[i] ? <Link to="/profile"><button className={styles.learnmore} key={key+4} onClick={() => profilePage(i, data)}>Learn more.</button></Link>: null)
       key+=6
     }
     setRestaurantsList(restaurants_updated);
@@ -166,6 +167,7 @@ function Search(props){
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     {restaurants}
+    <div className={styles.spacing}></div>
   </header>
 );
 }

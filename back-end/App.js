@@ -70,7 +70,12 @@ app.use(cors())
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
-    body(req.body.email).isEmail()
+    let emailCheck = body(req.body.email).isEmail()
+    if (!emailCheck){
+        res.status(400).json({
+            "message": "Invalid email."
+        })
+    }
     User.find({email: req.body.email}, function (err, docs) {
         let valid = bcrypt.compare(docs[0].first_pass, req.body.password);
         if (valid){
@@ -160,9 +165,7 @@ app.post("/restaurants", (req, res, next) => {
     jwt.verify(token, process.env.secret, (err, decoded)=> {
         if (err){
             Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
-                console.log(req.body)
                 res.status(200).send(docs)
-                console.log(docs)
             });
         }
         else{

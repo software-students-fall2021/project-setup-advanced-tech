@@ -57,7 +57,7 @@ function App() {
   function displayProfilePage(i, data){
     setProfilePage(<RestaurantProfilePage 
       name={data[i].name} address={data[i].address} 
-      telephone={data[i].telephone} dishes={data[0].dishes}/>)
+      telephone={data[i].telephone} dishes={data[i].dishes}/>)
   }
 
   function login(data){
@@ -115,7 +115,7 @@ function App() {
                 </div>}
               </div>
               <div className="explore" ref={elementRef}>
-                {userdata != null ? <Search token={token} name={userdata.email} allergies={userdata.allergies}profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
+                {userdata != null ? <Search token={token} name={userdata.email} allergies={userdata.allergies} profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
                 {!signedin ? 
                 <div className="signin">
                   <h2>Want to search according to your own preferences?</h2>
