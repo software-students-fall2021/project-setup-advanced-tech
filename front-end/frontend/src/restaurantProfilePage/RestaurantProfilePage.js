@@ -9,17 +9,53 @@ function RestaurantProfilePage(props){
 
   let dishes = []
   for (let i = 0; i < props.dishes.length; i++){
-    dishes.push(<div>{props.dishes[i].name}</div>)
+    dishes.push(<h3>{props.dishes[i].name}</h3>)
+  }
+
+  function uber(){
+    window.open("https://www.ubereats.com/")
+  }
+
+  function grubhub(){
+    window.open("https://www.grubhub.com/")
+  }
+
+  function doordash(){
+    window.open("https://www.doordash.com/")
   }
 
   return(
   <div className={styles.RestaurantProfilePage}>
-    <Link to="/"><button>Go back.</button></Link>
     <h1>{props.name}</h1>
-    <h2>{props.telephone}</h2>
-    <h2>{props.address}</h2>
-    <h3>Dishes:</h3>
-    {dishes}
+    <div className={styles.spacing}></div>
+    <div className={styles.divide}>
+      <div className={styles.spacingsmall}></div>
+      <h2 className={styles.label}>Telephone</h2>
+      <h3>{props.telephone}</h3>
+    </div>
+    <div className={styles.spacing}></div>
+    <div className={styles.divide}>
+    <div className={styles.spacingsmall}></div>
+      <h2 className={styles.label}>Address</h2>
+      <h3>{props.address}</h3>
+    </div>
+    <div className={styles.spacing}></div>
+    <div className={styles.divide}>
+    <div className={styles.spacingsmall}></div>
+      <h3 className={styles.label}>Dishes:</h3>
+      {dishes}
+    </div>
+    <div className={styles.spacing}></div>
+    <div className={styles.orders}>
+    <button onClick={uber}>Uber Eats</button>
+    <div className={styles.spacingsmall}></div>
+    <button onClick={grubhub}>GrubHub</button>
+    <div className={styles.spacingsmall}></div>
+    <button onClick={doordash}>DoorDash</button>
+    </div>
+    <div className={styles.spacing}></div>
+    <Link to="/"><button>Go back.</button></Link>
+    <div className={styles.spacing}></div>
   </div>
 );}
 
