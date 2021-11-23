@@ -10,6 +10,8 @@ In the this directory, you can run to initialize the server on port 3001:
 
 followed by
 
+Please keep in mind that you will NOT be able to run the server because it requires the password to the database, which is in an .env file. If you would like the password, please send a message.
+
 ### `mocha <test>`
 
 within the /test directory of backend to run a particular test. Please note that the test to run is
