@@ -12,5 +12,5 @@ const resetRequest = new mongoose.Schema({
     email: String,
     date: String
 })
-const ResetRequest = mongoose.model('ResetRequest', resetRequest)
-module.exports = mongoose.model('Dishes', dishSchema)
+
+module.exports = mongoose.model('ResetPassword', resetRequest)

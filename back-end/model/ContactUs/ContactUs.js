@@ -14,5 +14,5 @@ const contactRequest = new mongoose.Schema({
     email: String,
     message: String
 })
-const ContactRequest = mongoose.model('ContactRequest', contactRequest)
-module.exports = mongoose.model('Dishes', dishSchema)
+
+module.exports = mongoose.model('ContactRequest', contactRequest)
