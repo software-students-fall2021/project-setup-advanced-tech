@@ -3,3 +3,48 @@
     min-height: 100vh;
     text-align: center;
 }
+
+.RestaurantProfilePage button{
+    height: 50px;
+    width: 40%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.spacing{
+    height: 100px;
+}
+
+.spacingsmall{
+    height: 20px;
+}
+
+.RestaurantProfilePage .label{
+    width: 20%;
+    height: 50px;
+    background-color: white;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.RestaurantProfilePage .label{
+    color: purple;
+}
+
+.RestaurantProfilePage .divide{
+    margin-top: 40px;
+    border: 1px solid white;
+    width: 75%;
+    margin: auto;
+}
+.RestaurantProfilePage .orders{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}

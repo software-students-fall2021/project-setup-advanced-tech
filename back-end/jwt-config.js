@@ -1,4 +1,4 @@
-/*require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
+require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 const passportJWT = require("passport-jwt")
 const ExtractJwt = passportJWT.ExtractJwt
 const JwtStrategy = passportJWT.Strategy
@@ -31,4 +31,4 @@ const jwtStrategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
 module.exports = {
   jwtOptions,
   jwtStrategy,
-}*/
+}

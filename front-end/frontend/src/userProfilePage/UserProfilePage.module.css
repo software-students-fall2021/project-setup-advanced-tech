@@ -1,5 +1,61 @@
 .UserProfilePage {
     color: white;
-    text-align: center;
     min-height: 100vh;
+}
+
+.UserProfilePage h2{
+    text-align: center;
+}
+
+.information{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+    top: 30%;
+}
+
+.information .label{
+    color: purple;
+}
+
+.spacing{
+    height: 150px;
+}
+
+.UserProfilePage h3{
+    color: white;
+}
+
+.UserProfilePage .label{
+    width: 20%;
+    height: 50px;
+    background-color: white;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.UserProfilePage .divide{
+    margin: auto;
+    width: 75%;
+    border: 1px solid white;
+}
+
+.spacingsmall{
+    height: 100px;
+}
+
+.spacingsmallsmall{
+    height: 20px;
+}
+
+.information button{
+    height: 50px;
+  width: 40%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
