@@ -152,14 +152,28 @@ app.post("/contactus", (req, res) => {
     const message = req.body.message //need to store message somewhere
 
     //This is where we access the database
-    
+    let newRequest = new ContactRequest({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: email, 
+        message: message
+    }) //created a new request; NOTE: may have to eliminate id
 
-    res.status(200).json(
-        {
-        "message": "Success",
-        "data": req.body
-        })
-    console.log("success to contact")
+    newRequest.save(function (err, docs) {
+        if (err){
+            res.status(200).json({
+                "message": "Failure"
+            })
+        }
+        else{
+            res.status(200).json({
+                "message": "Success"
+            })
+        }
+    })
+    console.log("Succesfully sent message to HQ!");
+
+
 })
 
 
