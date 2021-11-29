@@ -1,3 +1,4 @@
+
 const { default: axios } = require('axios')
 const express = require('express')
 const app = express()
@@ -137,11 +138,25 @@ app.post("/createaccount", (req, res) => {
 })
 //User wants to  reset password
 app.post("/resetpassword", (req, res) => {
-    res.status(200).json({
-        "message" : "Success",
-        "data": req.body
-    })
-    console.log("Successfully sent request to reset password.")
+
+    let requestSender = new ResetRequest({
+        email: req.body.email,
+        date: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate
+    })  //created a new request to reset password; NOTE: may have to eliminate id
+
+    requestSender.save(function (err, docs) {
+        if (err){
+            res.status(200).json({
+                "message": "Failure"
+            })
+        }
+        else{
+            res.status(200).json({
+                "message": "Success"
+            })
+        }
+    }) //saves request to database, if we're using this
+    console.log("Succesfully sent message to HQ!");
 })
 
 //User wants to contact us
@@ -150,12 +165,29 @@ app.post("/contactus", (req, res) => {
     const email = req.body.email //need to verify email
     const message = req.body.message //need to store message somewhere
 
-    res.status(200).json(
-        {
-        "message": "Success",
-        "data": req.body
-        })
-    console.log("success to contact")
+    //This is where we access the database
+    let newRequest = new ContactRequest({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: email, 
+        message: message
+    }) //created a new request; NOTE: may have to eliminate id
+
+    newRequest.save(function (err, docs) {
+        if (err){
+            res.status(200).json({
+                "message": "Failure"
+            })
+        }
+        else{
+            res.status(200).json({
+                "message": "Success"
+            })
+        }
+    })
+    console.log("Succesfully sent message to HQ!");
+
+
 })
 
 
@@ -193,5 +225,5 @@ app.post("/restaurants", (req, res, next) => {
 })
 
 
-//passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),
 
+//passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),
