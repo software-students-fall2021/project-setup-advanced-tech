@@ -77,7 +77,13 @@ app.post("/login", (req, res, next) => {
         })
     }
     User.find({email: req.body.email}, function (err, docs) {
-        let valid = bcrypt.compare(docs[0].first_pass, req.body.password);
+        if (docs.length == 0){
+            res.status(400).json({
+                "message": "Invalid email or password."
+            })
+        }
+        else{
+            let valid = bcrypt.compare(docs[0].first_pass, req.body.password);
         if (valid){
             let userData = {
                 first_name: docs[0].first_name,
@@ -86,7 +92,7 @@ app.post("/login", (req, res, next) => {
                 allergies: docs[0].allergies
             }
             const email = docs[0].email
-            const token = jwt.sign({email}, process.env.secret, {
+            const token = jwt.sign({email}, process.env.SECRET, {
                 expiresIn: 1000
             })
             res.status(200).json(
@@ -97,8 +103,8 @@ app.post("/login", (req, res, next) => {
         else{
             res.status(200).json({auth: false, token: null})
         }
+        }
       });
-    console.log("Successfully logged in user!")
 
 })
 //when the user creates an account
