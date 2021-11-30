@@ -52,14 +52,12 @@ const dishSchema = new mongoose.Schema({
 const Dish = mongoose.model('Dish', dishSchema)
 
 const resetRequest = new mongoose.Schema({
-    id: Number,
     email: String,
     date: String
 })
 const ResetRequest = mongoose.model('ResetRequest', resetRequest)
 
 const contactRequest = new mongoose.Schema({
-    id: Number,
     first_name: String,
     last_name: String,
     email: String,
@@ -142,7 +140,7 @@ app.post("/resetpassword", (req, res) => {
     let requestSender = new ResetRequest({
         email: req.body.email,
         date: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate
-    })  //created a new request to reset password; NOTE: may have to eliminate id
+    })  //created a new request to reset password
 
     requestSender.save(function (err, docs) {
         if (err){
@@ -154,9 +152,10 @@ app.post("/resetpassword", (req, res) => {
             res.status(200).json({
                 "message": "Success"
             })
+            console.log("Succesfully sent message to HQ!");
         }
     }) //saves request to database, if we're using this
-    console.log("Succesfully sent message to HQ!");
+    
 })
 
 //User wants to contact us
@@ -171,7 +170,7 @@ app.post("/contactus", (req, res) => {
         last_name: req.body.last_name,
         email: email, 
         message: message
-    }) //created a new request; NOTE: may have to eliminate id
+    }) //created a new request; 
 
     newRequest.save(function (err, docs) {
         if (err){
@@ -183,9 +182,10 @@ app.post("/contactus", (req, res) => {
             res.status(200).json({
                 "message": "Success"
             })
+            console.log("Succesfully sent message to HQ!");
         }
     })
-    console.log("Succesfully sent message to HQ!");
+    
 
 
 })

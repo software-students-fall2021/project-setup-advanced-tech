@@ -8,7 +8,6 @@ app.use(express.urlencoded({ extended: true }))
 const mongoose = require('mongoose'); 
 
 const resetRequest = new mongoose.Schema({
-    id: Number,
     email: String,
     date: String
 })
