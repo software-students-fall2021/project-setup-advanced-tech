@@ -32,11 +32,13 @@ function App() {
   const[signedin, setSignin] = useState(false);
 
   const [userdata, setUserdata] = useState({first_name: "", last_name: "", email: "", allergies: ""})
+  const [token, setToken] = useState("");
   const [reset, resetPassword] = useState(false)
   const [created, createAccount] = useState(false)
   const [contacted, contactUs] = useState(false)
   const [profilePage, setProfilePage] = useState(null);
   const[userprofilepage, setuserprofilepage] = useState(null);
+  const[search, setSearchPage] = useState(<Search profilePage={displayProfilePage}/>);
 
   useEffect(() => {
     const divElement = elementRef.current;
@@ -53,14 +55,15 @@ function App() {
   }
 
   function displayProfilePage(i, data){
-    console.log(userdata)
     setProfilePage(<RestaurantProfilePage 
       name={data[i].name} address={data[i].address} 
-      telephone={data[i].telephone}/>)
+      telephone={data[i].telephone} dishes={data[i].dishes}/>)
   }
 
   function login(data){
-    setUserdata(data)
+    setUserdata(data.data)
+    setToken(data.token);
+    setSearchPage(<Search token={token} name={userdata.email} allergies={userdata.allergies}profilePage={displayProfilePage}/>)
   }
 
   function renderResetPassword(){
@@ -87,6 +90,8 @@ function App() {
   function logout(){
     setSignin(false);
     setUserdata({first_name: "", last_name: "", email: "", allergies: ""})
+    setToken("")
+    setSearchPage(<Search profilePage={displayProfilePage}/>)
   }
 
   window.onpopstate = function(event) {
@@ -95,8 +100,6 @@ function App() {
 
   return (
     <div className="App">
-      <RestaurantList></RestaurantList>
-      <Restaurant id = "5"></Restaurant>
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
@@ -105,14 +108,14 @@ function App() {
                 {!signedin ? <button onClick={scrollTo}>
                   Explore Restaurants.
                 </button>: <div className="signedIn">
-                  <Link style={{textDecoration: 'none'}}to="/home"><button onClick={displayUserProfilePage}>
+                  <Link style={{textDecoration: 'none'}} to="/home"><button onClick={displayUserProfilePage}>
                   My Stuff.
                 </button></Link>
                 <button onClick={logout}>Logout</button>
                 </div>}
               </div>
               <div className="explore" ref={elementRef}>
-                {userdata != null ? <Search name={userdata.email} profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
+                {userdata != null ? <Search token={token} name={userdata.email} allergies={userdata.allergies}profilePage={displayProfilePage}/>: <Search profilePage={displayProfilePage}/>}
                 {!signedin ? 
                 <div className="signin">
                   <h2>Want to search according to your own preferences?</h2>

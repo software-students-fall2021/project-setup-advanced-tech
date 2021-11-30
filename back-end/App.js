@@ -225,4 +225,5 @@ app.post("/restaurants", (req, res, next) => {
 })
 
 
+
 //passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),

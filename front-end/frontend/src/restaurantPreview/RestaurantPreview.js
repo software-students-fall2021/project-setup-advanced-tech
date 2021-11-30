@@ -13,7 +13,7 @@ const RestaurantPreview = (props) => {
   // inject a random placeholder image from the Lorem Picsum API
   // the mockaroo API we're using doesn't include this
   // ultimately, this data would come from the API
-  const imgSrc = `https://picsum.photos/100?id=${props.details.id}` // tack on this animal's id to the query
+  const imgSrc = `https://picsum.photos/100?id=${props.dishnum}` // tack on this animal's id to the query
 
   return (
     <Container className="box">
@@ -24,17 +24,16 @@ const RestaurantPreview = (props) => {
           <Row>
             <Col xs={5}>
               
-            <Link to={`/retaurant/${props.details.id}`}>
-              <h3 className="name">{props.details.name}</h3> 
+            <Link to={`/retaurant/${props.name}`}>
+              <h3 className="name">{props.name}</h3> 
             </Link>
             </Col>
             <Col>
-            <Button className="button">Collect</Button>
             </Col>
           </Row>
-          <p className="ingredients">{props.details.city}, {props.details.state}
+          <p className="ingredients">{props.city}, {props.state}
           </p>
-          <p className="ingredients">{props.details.dishnum} dishes in total
+          <p className="ingredients">{props.dishnum} dishes in total
           </p>
         </div>
     </Container>
