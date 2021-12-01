@@ -99,9 +99,11 @@ function App() {
 };
 
   return (
+    // <div className="APP2">
+    //   <RestaurantList></RestaurantList>
+    //   <Restaurant id = "5"></Restaurant>
+    // </div>
     <div className="App">
-      <RestaurantList></RestaurantList>
-      <Restaurant id = "5"></Restaurant>
       <BrowserRouter>
         <Switch>
           <Route exact path="/">

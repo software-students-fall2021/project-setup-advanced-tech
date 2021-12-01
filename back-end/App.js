@@ -64,6 +64,7 @@ app.post("/login", (req, res, next) => {
         })
     }
     User.find({email: req.body.email}, function (err, docs) {
+        console.log(docs)
         let valid = bcrypt.compare(docs[0].first_pass, req.body.password);
         if (valid){
             let userData = {
@@ -80,6 +81,7 @@ app.post("/login", (req, res, next) => {
                 {auth: true, token: token,
                 data: userData}
                 )
+            console.log("hello")
         }
         else{
             res.status(200).json({auth: false, token: null})

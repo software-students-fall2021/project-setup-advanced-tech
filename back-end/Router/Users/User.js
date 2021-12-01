@@ -78,6 +78,7 @@ userRouter.post('/login', (req,res)=>{
           const _id = doc._id
           const username = doc.username
           const token = jwt.sign({_id, username},secret, {expiresIn: '24h'})
+          console.log(token)
           res.send(token)
         }
       }
