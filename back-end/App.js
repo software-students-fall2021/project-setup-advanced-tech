@@ -1,14 +1,12 @@
+
 const { default: axios } = require('axios')
 const express = require('express')
 const app = express()
 let cors = require('cors')
 module.exports = app
-const bodyParser = require('body-parser')
 require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 require('dotenv').config()
 const db = require('db')
 const jwt = require("jsonwebtoken")
@@ -43,6 +41,22 @@ const restaurantSchema = new mongoose.Schema({
     zip: String
 })
 const Restaurant = mongoose.model('restaurants', restaurantSchema)
+
+const dishSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    restaurant: Number,
+    description: String,
+    ingredients: String
+})
+const Dish = mongoose.model('Dish', dishSchema)
+
+const resetRequest = new mongoose.Schema({
+    id: Number,
+    email: String,
+    date: String
+})
+const ResetRequest = mongoose.model('ResetRequest', resetRequest)
 
 const contactRequest = new mongoose.Schema({
     id: Number,
@@ -126,11 +140,25 @@ app.post("/createaccount", (req, res) => {
 })
 //User wants to  reset password
 app.post("/resetpassword", (req, res) => {
-    res.status(200).json({
-        "message" : "Success",
-        "data": req.body
-    })
-    console.log("Successfully sent request to reset password.")
+
+    let requestSender = new ResetRequest({
+        email: req.body.email,
+        date: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate
+    })  //created a new request to reset password; NOTE: may have to eliminate id
+
+    requestSender.save(function (err, docs) {
+        if (err){
+            res.status(200).json({
+                "message": "Failure"
+            })
+        }
+        else{
+            res.status(200).json({
+                "message": "Success"
+            })
+        }
+    }) //saves request to database, if we're using this
+    console.log("Succesfully sent message to HQ!");
 })
 
 //User wants to contact us
@@ -139,12 +167,29 @@ app.post("/contactus", (req, res) => {
     const email = req.body.email //need to verify email
     const message = req.body.message //need to store message somewhere
 
-    res.status(200).json(
-        {
-        "message": "Success",
-        "data": req.body
-        })
-    console.log("success to contact")
+    //This is where we access the database
+    let newRequest = new ContactRequest({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        email: email, 
+        message: message
+    }) //created a new request; NOTE: may have to eliminate id
+
+    newRequest.save(function (err, docs) {
+        if (err){
+            res.status(200).json({
+                "message": "Failure"
+            })
+        }
+        else{
+            res.status(200).json({
+                "message": "Success"
+            })
+        }
+    })
+    console.log("Succesfully sent message to HQ!");
+
+
 })
 
 
@@ -182,7 +227,5 @@ app.post("/restaurants", (req, res, next) => {
 })
 
 
-//passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),
 
-const dishesRouter = require('./Router/Dishes/Dishes')
-app.use('/dishes', dishesRouter)
+//passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),
