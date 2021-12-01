@@ -5,7 +5,7 @@ let chaiHttp = require('chai-http');
 //let server = require('../server');
 //let should = chai.should();
 
-const app = require('../App.js')
+const app = require('../app')
 chai.use(chaiHttp);
 
 //for post requests, have dummy data

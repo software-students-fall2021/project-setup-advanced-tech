@@ -2,8 +2,8 @@
 const { default: axios } = require('axios')
 const express = require('express')
 const app = express()
-let cors = require('cors')
-module.exports = app
+cors = require('cors')
+app.use(cors())
 require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
@@ -15,7 +15,7 @@ const bcrypt = require("bcrypt");
 
 //stuff with mongoose and dontev
 const mongoose = require('mongoose');  
-const password = process.env.PASSWORD;
+password = process.env.DB_PASS
 mongoose.connect("mongodb+srv://admin-weet:" + password + "@weet.ze06y.mongodb.net/weet?retryWrites=true&w=majority"); 
 
 const userSchema = new mongoose.Schema({
@@ -66,8 +66,6 @@ const contactRequest = new mongoose.Schema({
     message: String
 })
 const ContactRequest = mongoose.model('ContactRequest', contactRequest)
-
-app.use(cors())
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
@@ -229,3 +227,5 @@ app.post("/restaurants", (req, res, next) => {
 
 
 //passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),
+
+module.exports = app
