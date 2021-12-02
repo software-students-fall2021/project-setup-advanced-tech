@@ -13,8 +13,7 @@ describe('/GET restaurants', () => {
       chai.request(app)
           .get('/restaurants')
           .end((error, res) => {
-            assert(200, res.status);
-            done()
+            assert(200, res.status)
           }
           )
     });
@@ -31,7 +30,6 @@ describe('/POST login', () => {
           .send(data)
           .end((error, res) => {
             assert(200, res.status);
-            done()
           }
           )
     });
@@ -47,7 +45,6 @@ describe('/POST /resetpassword', () => {
           .send(data)
           .end((error, res) => {
             assert(200, res.status);
-            done()
           }
           )
     });
@@ -65,8 +62,7 @@ describe('/POST contactus', () => {
           .post('/contactus')
           .send(data)
           .end((error, res) => {
-            assert(200, res.status);
-            done()
+            assert(200, res.status)
           }
           )
     });
@@ -84,8 +80,7 @@ describe('/POST findrestaurants', () => {
           .post('/contactus')
           .send(data)
           .end((error, res) => {
-            assert(200, res.status);
-            done()
+            assert(200, res.status)
           }
           )
     });

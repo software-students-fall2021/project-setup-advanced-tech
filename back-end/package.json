@@ -1,10 +1,11 @@
 {
-  "name": "back-end",
+  "name": "y",
   "version": "1.0.0",
   "description": "The back-end of your project will live in this directory.",
   "main": "server.js",
   "scripts": {
-    "test": "nyc mocha --timeout=3000"
+    "test": "nyc mocha --timeout=3000",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,5 +31,15 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "supertest": "^6.1.6"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "y"
+  },
+  "keywords": [
+    "y"
+  ]
 }
