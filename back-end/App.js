@@ -39,7 +39,7 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     zip: String
 })
-const Restaurant = mongoose.model('restaurants', restaurantSchema)
+const Restaurant = mongoose.model('restaurant', restaurantSchema)
 
 const dishSchema = new mongoose.Schema({
     id: Number,
@@ -51,20 +51,18 @@ const dishSchema = new mongoose.Schema({
 const Dish = mongoose.model('Dish', dishSchema)
 
 const resetRequest = new mongoose.Schema({
-    id: Number,
     email: String,
     date: String
 })
-const ResetRequest = mongoose.model('ResetRequest', resetRequest)
+const ResetRequest = mongoose.model('resetrequest', resetRequest)
 
 const contactRequest = new mongoose.Schema({
-    id: Number,
     first_name: String,
     last_name: String,
     email: String,
     message: String
 })
-const ContactRequest = mongoose.model('ContactRequest', contactRequest)
+const ContactRequest = mongoose.model('contactrequest', contactRequest)
 
 app.use(cors())
 
@@ -143,24 +141,48 @@ app.post("/createaccount", (req, res) => {
 })
 //User wants to  reset password
 app.post("/resetpassword", (req, res) => {
-    res.status(200).json({
-        "message" : "Success",
-        "data": req.body
-    })
-    console.log("Successfully sent request to reset password.")
+    var currentdate = new Date();
+    let requestSender = new ResetRequest({
+        email: req.body.data.email,
+    })  //created a new request to reset password; NOTE: may have to eliminate id
+    requestSender.save(function (err, docs) {
+        if (err){
+            res.status(200).json({
+                "message": "Failure"
+            })
+        }
+        else{
+            res.status(200).json({
+                "message": "Success"
+            })
+        }
+    }) //saves request to database, if we're using this
+    console.log("Succesfully sent message to HQ!");
 })
 
 //User wants to contact us
 app.post("/contactus", (req, res) => {
-    const name = req.body.first_name + req.body.last_name
-    const email = req.body.email //need to verify email
-    const message = req.body.message //need to store message somewhere
-
-    res.status(200).json(
-        {
-        "message": "Success",
-        "data": req.body
-        })
+    const name = req.body.data.firstname + req.body.data.lastname
+    const email = req.body.data.email //need to verify email
+    const message = req.body.data.message //need to store message somewhere
+    console.log(req.body)
+    let contactreq = new ContactRequest({
+        name: name,
+        email: email,
+        message: message
+    })
+    contactreq.save(function(err, docs){
+        if (err){
+            res.status(200).json({
+                "message": "Failure"
+            })
+        }
+        else{
+            res.status(200).json({
+                "message": "Success"
+            })
+        }
+    })
     console.log("success to contact")
 })
 

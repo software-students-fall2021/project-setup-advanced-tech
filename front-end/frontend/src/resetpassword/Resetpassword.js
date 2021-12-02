@@ -2,14 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Resetpassword.module.css';
 import {useHistory} from 'react-router-dom';
+import { useState } from 'react';
 const { default: axios } = require('axios')
 
 function Resetpassword(props){ 
   const history = useHistory()
+  const[data, toggleData] = useState({email: ""})
 
   function resetpassword(e){
     e.preventDefault()
-    axios.post("http://localhost:3001/resetpassword", {}).then(response => {console.log(response)})
+    axios.post("http://localhost:3001/resetpassword", {data}).then(
+      response => {console.log(response)}
+      )
     props.reset();
     history.push("/")
   }
@@ -25,7 +29,8 @@ function Resetpassword(props){
       <div className={styles.spacing}></div>
       <div className={styles.input}>
         <h2>Email.</h2>
-        <input type="text" name= "email" placeholder="Please enter your email."></input>
+        <input type="text" name= "email" placeholder="Please enter your email."
+        onChange={e => toggleData({...data, email: e.target.value})} value={data.email}></input>
       </div>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
