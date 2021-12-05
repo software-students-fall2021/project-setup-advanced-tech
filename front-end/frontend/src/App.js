@@ -103,6 +103,10 @@ function App() {
 };
 
   return (
+    // <div className="APP2">
+    //   <RestaurantList></RestaurantList>
+    //   <Restaurant id = "5"></Restaurant>
+    // </div>
     <div className="App">
       <BrowserRouter>
         <Switch>

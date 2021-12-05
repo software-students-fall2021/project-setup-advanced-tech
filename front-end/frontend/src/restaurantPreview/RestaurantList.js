@@ -12,7 +12,7 @@ const RestaurantList = (props) => {
   useEffect(() => {
     // fetch some mock data about animals for sale
     //console.log('fetching 10 random animals...')
-    axios('http://localhost:3001/restaurants') //this has to be changed to localhost 4000; won't be .json; maybe 
+    axios('https://my.api.mockaroo.com/restaurant.json?key=a77dd4e0') //this has to be changed to localhost 4000; won't be .json; maybe 
       .then((response) => {
         // extract the data from the server response
         //console.log(data)

@@ -12,7 +12,7 @@ const DishesDisplay = (props) => {
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log('fetching 10 random dishes...')
-    axios(`http://localhost:3001/dishes/dish/${props.id}`)
+    axios(`https://my.api.mockaroo.com/dishes.json?key=a77dd4e0`)
       .then((response) => {
         // extract the data from the server response
         setData(response.data)
