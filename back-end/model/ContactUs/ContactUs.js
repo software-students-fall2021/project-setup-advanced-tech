@@ -8,7 +8,6 @@ app.use(express.urlencoded({ extended: true }))
 const mongoose = require('mongoose'); 
 
 const contactRequest = new mongoose.Schema({
-    id: Number,
     first_name: String,
     last_name: String,
     email: String,
