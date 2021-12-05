@@ -1,9 +1,8 @@
-
 const { default: axios } = require('axios')
 const express = require('express')
 const app = express()
-cors = require('cors')
-app.use(cors())
+let cors = require('cors')
+module.exports = app
 require("dotenv").config({ silent: true })
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
@@ -15,7 +14,7 @@ const bcrypt = require("bcrypt");
 
 //stuff with mongoose and dontev
 const mongoose = require('mongoose');  
-password = process.env.DB_PASS
+const password = process.env.PASSWORD;
 mongoose.connect("mongodb+srv://admin-weet:" + password + "@weet.ze06y.mongodb.net/weet?retryWrites=true&w=majority"); 
 
 const userSchema = new mongoose.Schema({
@@ -40,7 +39,7 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     zip: String
 })
-const Restaurant = mongoose.model('restaurants', restaurantSchema)
+const Restaurant = mongoose.model('restaurant', restaurantSchema)
 
 const dishSchema = new mongoose.Schema({
     id: Number,
@@ -52,20 +51,20 @@ const dishSchema = new mongoose.Schema({
 const Dish = mongoose.model('Dish', dishSchema)
 
 const resetRequest = new mongoose.Schema({
-    id: Number,
     email: String,
     date: String
 })
-const ResetRequest = mongoose.model('ResetRequest', resetRequest)
+const ResetRequest = mongoose.model('resetrequest', resetRequest)
 
 const contactRequest = new mongoose.Schema({
-    id: Number,
     first_name: String,
     last_name: String,
     email: String,
     message: String
 })
-const ContactRequest = mongoose.model('ContactRequest', contactRequest)
+const ContactRequest = mongoose.model('contactrequest', contactRequest)
+
+app.use(cors())
 
 //when the user signs in 
 app.post("/login", (req, res, next) => {
@@ -76,8 +75,13 @@ app.post("/login", (req, res, next) => {
         })
     }
     User.find({email: req.body.email}, function (err, docs) {
-        console.log(docs)
-        let valid = bcrypt.compare(docs[0].first_pass, req.body.password);
+        if (docs.length == 0){
+            res.status(400).json({
+                "message": "Invalid email or password."
+            })
+        }
+        else{
+            let valid = bcrypt.compare(docs[0].first_pass, req.body.password);
         if (valid){
             let userData = {
                 first_name: docs[0].first_name,
@@ -86,20 +90,19 @@ app.post("/login", (req, res, next) => {
                 allergies: docs[0].allergies
             }
             const email = docs[0].email
-            const token = jwt.sign({email}, process.env.secret, {
+            const token = jwt.sign({email}, process.env.SECRET, {
                 expiresIn: 1000
             })
             res.status(200).json(
                 {auth: true, token: token,
                 data: userData}
                 )
-            console.log("hello")
         }
         else{
             res.status(200).json({auth: false, token: null})
         }
+        }
       });
-    console.log("Successfully logged in user!")
 
 })
 //when the user creates an account
@@ -138,12 +141,10 @@ app.post("/createaccount", (req, res) => {
 })
 //User wants to  reset password
 app.post("/resetpassword", (req, res) => {
-
+    var currentdate = new Date();
     let requestSender = new ResetRequest({
-        email: req.body.email,
-        date: today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate
+        email: req.body.data.email,
     })  //created a new request to reset password; NOTE: may have to eliminate id
-
     requestSender.save(function (err, docs) {
         if (err){
             res.status(200).json({
@@ -161,19 +162,16 @@ app.post("/resetpassword", (req, res) => {
 
 //User wants to contact us
 app.post("/contactus", (req, res) => {
-    const name = req.body.first_name + req.body.last_name
-    const email = req.body.email //need to verify email
-    const message = req.body.message //need to store message somewhere
-
-    //This is where we access the database
-    let newRequest = new ContactRequest({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: email, 
+    const name = req.body.data.firstname + req.body.data.lastname
+    const email = req.body.data.email //need to verify email
+    const message = req.body.data.message //need to store message somewhere
+    console.log(req.body)
+    let contactreq = new ContactRequest({
+        name: name,
+        email: email,
         message: message
-    }) //created a new request; NOTE: may have to eliminate id
-
-    newRequest.save(function (err, docs) {
+    })
+    contactreq.save(function(err, docs){
         if (err){
             res.status(200).json({
                 "message": "Failure"
@@ -185,16 +183,14 @@ app.post("/contactus", (req, res) => {
             })
         }
     })
-    console.log("Succesfully sent message to HQ!");
-
-
+    console.log("success to contact")
 })
 
 
 //if the user just searches for restaurants without parameters
 app.post("/restaurants", (req, res, next) => {
     const token = req.headers['x-access-token']
-    jwt.verify(token, process.env.secret, (err, decoded)=> {
+    jwt.verify(token, process.env.SECRET, (err, decoded)=> {
         if (err){
             Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
                 res.status(200).send(docs)
@@ -225,7 +221,5 @@ app.post("/restaurants", (req, res, next) => {
 })
 
 
-
 //passport.authenticate("jwt", {successRedirect: '/restaurants', failureRedirect: '/login', failureFlash: true}),
 
-module.exports = app

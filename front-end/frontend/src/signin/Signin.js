@@ -13,6 +13,7 @@ const { default: axios } = require('axios');
 function Signin(props){ 
 
   const [data, setData] = useState({email: "", password: ""})
+  const[errorMessage, setErrorMessage] = useState("");
 
   window.onpopstate = function(event) {
     window.location.reload();
@@ -20,9 +21,12 @@ function Signin(props){
   const history = useHistory()
   const login = e => {
     e.preventDefault();
-    axios.post("http://localhost:3001/login", data).then(
+    axios.post("http://localhost:3001/login", data).catch(err => {}).then(
       response => {
-        if (response.data !== null){
+        if (response == null){
+          setErrorMessage("Username or password incorrect.")
+        }
+        else if (response.data !== null){
           props.login(response.data)
           history.push("/")
         }
@@ -53,6 +57,7 @@ function Signin(props){
           <div className={styles.spacing}></div>
           <div className={styles.spacing}></div>
           <div className={styles.spacing}></div>
+          {errorMessage != "" ? <h4 style={{textAlign: 'center'}}>{errorMessage}</h4>: null};
           <button>Sign in.</button>
           <div className={styles.spacing}></div>
           <div className={styles.spacing}></div>

@@ -1,4 +1,4 @@
-const server = require("./app")
+const server = require("./App")
 const port = 3001
 
 const listener = server.listen(port, function () {

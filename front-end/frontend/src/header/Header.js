@@ -24,17 +24,25 @@ function Search(props){
   const[ratingClicked, toggleRating] = useState(false);
   const[allergiesClicked, toggleAllergies] = useState(false);
   const [searchCriteria, setSearchCriteria] = useState({location: "", rating: "", allergies: "", food_type: ""})
+  const[searchResponse, setSearchResponse] = useState(null);
+
+  useEffect(() => {
+    setSearchResponse("Your search returned " + restaurants.length + " results.")
+  }, [restaurants])
 
   function location(){
     toggleLocation(!locationClicked);
+    setDiet(searchCriteria.location + " | " + searchCriteria.food_type + " | " + searchCriteria.rating)
   }
 
   function foodType(){
     toggleFoodType(!foodTypeClicked)
+    setDiet(searchCriteria.location + " | " + searchCriteria.food_type + " | " + searchCriteria.rating)
   }
 
   function rating(){
     toggleRating(!ratingClicked)
+    setDiet(searchCriteria.location + " | " + searchCriteria.food_type + " | " + searchCriteria.rating)
   }
 
   function allergies(){
@@ -99,6 +107,7 @@ function Search(props){
       food_type: searchCriteria.food_type,
       allergies: props.allergies
     }
+    console.log(props.token);
     axios.post("http://localhost:3001/restaurants", search, {headers: {"x-access-token": props.token}})
     .then(response => {
       console.log(response)
@@ -123,8 +132,7 @@ function Search(props){
         id="diet" 
         className="diet" 
         placeholder="Search for restaurants, food, or diets." 
-        value={diet}
-        onChange={event => setDiet(event.target.value)}>
+        value={diet}>
         </input>
         <button type="submit" value="Submit">Search</button>
       </form>
@@ -162,7 +170,7 @@ function Search(props){
     </div>: null}
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
-    {searched ? <h2>Results for "{diet}"</h2>: null}
+    {searched ? <h2>{searchResponse}</h2>: null}
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
     <div className={styles.spacing}></div>
