@@ -107,6 +107,7 @@ function Search(props){
       food_type: searchCriteria.food_type,
       allergies: props.allergies
     }
+    console.log(props.token);
     axios.post("http://localhost:3001/restaurants", search, {headers: {"x-access-token": props.token}})
     .then(response => {
       console.log(response)

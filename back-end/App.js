@@ -190,7 +190,7 @@ app.post("/contactus", (req, res) => {
 //if the user just searches for restaurants without parameters
 app.post("/restaurants", (req, res, next) => {
     const token = req.headers['x-access-token']
-    jwt.verify(token, process.env.secret, (err, decoded)=> {
+    jwt.verify(token, process.env.SECRET, (err, decoded)=> {
         if (err){
             Restaurant.find({city: req.body.location, rating: parseInt(req.body.rating), type: req.body.food_type}, function(err, docs){
                 res.status(200).send(docs)

@@ -48,6 +48,10 @@ function App() {
     if (userdata.first_name !== "")
       setSignin(true)
   }, [userdata]);
+  
+  useEffect(() => {
+    console.log(token)
+  }, [token])
 
   function displayUserProfilePage(){
     setuserprofilepage(<UserProfilePage first_name={userdata.first_name}
