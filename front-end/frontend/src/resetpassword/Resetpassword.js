@@ -12,7 +12,7 @@ function Resetpassword(props){
 
   function resetpassword(e){
     e.preventDefault()
-    axios.post("http://http://147.182.189.125:3001/resetpassword", {data}).then(
+    axios.post("http://147.182.189.125:3001/resetpassword", {data}).then(
       response => {
         console.log(response)
         setConfirmationMessage(<h4>If your email is valid, we have sent a link to your email.</h4>)
@@ -38,6 +38,7 @@ function Resetpassword(props){
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
       <button>Send me a link.</button>
+      {confirmationMessage != null ? confirmationMessage: null}
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
     </form>
