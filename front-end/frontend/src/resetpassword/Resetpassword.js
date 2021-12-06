@@ -11,7 +11,7 @@ function Resetpassword(props){
 
   function resetpassword(e){
     e.preventDefault()
-    axios.post("http://localhost:3001/resetpassword", {data}).then(
+    axios.post("http://http://147.182.189.125:3001/resetpassword", {data}).then(
       response => {console.log(response)}
       )
     props.reset();
