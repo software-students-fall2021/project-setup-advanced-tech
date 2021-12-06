@@ -143,7 +143,7 @@ app.post("/createaccount", (req, res) => {
 app.post("/resetpassword", (req, res) => {
     var currentdate = new Date();
     let requestSender = new ResetRequest({
-        email: req.body.data.email,
+        email: req.body.email,
     })  //created a new request to reset password; NOTE: may have to eliminate id
     requestSender.save(function (err, docs) {
         if (err){
@@ -162,9 +162,9 @@ app.post("/resetpassword", (req, res) => {
 
 //User wants to contact us
 app.post("/contactus", (req, res) => {
-    const name = req.body.data.firstname + req.body.data.lastname
-    const email = req.body.data.email //need to verify email
-    const message = req.body.data.message //need to store message somewhere
+    const name = req.body.firstname + req.body.lastname
+    const email = req.body.email //need to verify email
+    const message = req.body.message //need to store message somewhere
     console.log(req.body)
     let contactreq = new ContactRequest({
         name: name,
