@@ -12,7 +12,7 @@ function Createaccount(props){
   const history = useHistory()
   function createaccount(e){
     e.preventDefault()
-    axios.post("http://http://147.182.189.125:3001/createaccount", registrationInfo).
+    axios.post("http://147.182.189.125:3001/createaccount", registrationInfo).
     then(response => 
       {
         if (response.data.message !== "Email has already been taken."){
