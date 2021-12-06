@@ -21,7 +21,7 @@ function Signin(props){
   const history = useHistory()
   const login = e => {
     e.preventDefault();
-    axios.post("http://http://147.182.189.125:3001/login", data).catch(err => {}).then(
+    axios.post("http://147.182.189.125:3001/login", data).catch(err => {}).then(
       response => {
         if (response == null){
           setErrorMessage("Username or password incorrect.")

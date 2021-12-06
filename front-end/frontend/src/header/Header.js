@@ -108,7 +108,7 @@ function Search(props){
       allergies: props.allergies
     }
     console.log(props.token);
-    axios.post("http://http://147.182.189.125:3001/restaurants", search, {headers: {"x-access-token": props.token}})
+    axios.post("http://147.182.189.125:3001/restaurants", search, {headers: {"x-access-token": props.token}})
     .then(response => {
       console.log(response)
       setRestaurant(response.data)});
