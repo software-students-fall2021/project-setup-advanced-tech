@@ -19,7 +19,6 @@ function Resetpassword(props){
   }
   return(
   <div className={styles.Resetpassword}>
-    {window.location.href === "http://localhost:3000/resetpassword"? 
     <form onSubmit={resetpassword}>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
@@ -38,7 +37,7 @@ function Resetpassword(props){
       <button>Send me a link.</button>
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
-    </form>: null}
+    </form>
   </div>
 );}
 
