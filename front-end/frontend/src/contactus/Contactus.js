@@ -9,12 +9,15 @@ const { default: axios } = require('axios')
 function Contactus(props){
   const history = useHistory()
   const[data, setData] = useState({firstname: "", lastname: "", email: "", message: ""})
+  const[confirmationMessage, setConfirmationMessage] = useState(null);
 
   function contactTeam(e){
     e.preventDefault()
-    axios.post("http://147.182.189.125:3001/contactus", {data}).then(response => {console.log(response)})
-    history.push("/")
-    props.contacted();
+    axios.post("http://147.182.189.125:3001/contactus", {data}).then(response => {
+      console.log(response)
+      setConfirmationMessage(<h4>Your contact request has been sent. We will get back you you soon.</h4>)
+      props.contacted();
+    })
     
   }
   return(
@@ -63,6 +66,7 @@ function Contactus(props){
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
       <button>Submit.</button>
+      {confirmationMessage != null ? confirmationMessage: null}
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
     </form>

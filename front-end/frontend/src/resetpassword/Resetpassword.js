@@ -8,14 +8,17 @@ const { default: axios } = require('axios')
 function Resetpassword(props){ 
   const history = useHistory()
   const[data, toggleData] = useState({email: ""})
+  const[confirmationMessage, setConfirmationMessage] = useState(null);
 
   function resetpassword(e){
     e.preventDefault()
     axios.post("http://http://147.182.189.125:3001/resetpassword", {data}).then(
-      response => {console.log(response)}
+      response => {
+        console.log(response)
+        setConfirmationMessage(<h4>If your email is valid, we have sent a link to your email.</h4>)
+        props.reset();
+      }
       )
-    props.reset();
-    history.push("/")
   }
   return(
   <div className={styles.Resetpassword}>
