@@ -36,7 +36,6 @@ function Signin(props){
 
   return(
       <div className={styles.Signin}>
-        {window.location.href === "http://localhost:3000/signin" ? 
         <form onSubmit ={login}>
         <div className={styles.spacing}></div>
           <h2>Sign in.</h2>
@@ -61,7 +60,7 @@ function Signin(props){
           <button>Sign in.</button>
           <div className={styles.spacing}></div>
           <div className={styles.spacing}></div>
-        </form>: null}
+        </form>
       </div>
 );
 }
