@@ -8,6 +8,7 @@ const { default: axios } = require('axios')
 function Createaccount(props){
   const[registrationInfo, setRegistrationInfo] = useState({first_name: "", last_name: "", email: "",
   first_pass: "", second_pass: "", allergies: ""});
+  const[errorMessage, setErrorMessage] = useState(null);
 
   const history = useHistory()
   function createaccount(e){
@@ -18,6 +19,9 @@ function Createaccount(props){
         if (response.data.message !== "Email has already been taken."){
           props.created()
           history.push("/")
+        }
+        else{
+          setErrorMessage(<h4>Email has already been taken.</h4>);
         }
       })
       
@@ -76,6 +80,7 @@ function Createaccount(props){
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
       <button>Create account.</button>
+      {errorMessage !== null ? errorMessage: null}
       <div className={styles.spacing}></div>
       <div className={styles.spacing}></div>
     </form>
