@@ -12,7 +12,7 @@ function Contactus(props){
 
   function contactTeam(e){
     e.preventDefault()
-    axios.post("/contactus", {data}).then(response => {console.log(response)})
+    axios.post("http://147.182.189.125:3001/contactus", {data}).then(response => {console.log(response)})
     history.push("/")
     props.contacted();
     
