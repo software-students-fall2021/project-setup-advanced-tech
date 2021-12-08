@@ -114,6 +114,7 @@ app.post("/createaccount", (req, res) => {
             }) 
         }
         else{
+            console.log(req.body.first_pass)
             let toInsert = new User({
                 first_name: req.body.first_name,
                 last_name: req.body.last_name,
