@@ -1,6 +1,12 @@
 # Link to the final project
 http://147.182.189.125:3000/
 
+# Extra credit
+None completed.
+
+# .env file
+PASSWORD=weet123
+SECRET=weet
 
 # Product Vision Statement
 
